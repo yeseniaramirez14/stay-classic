@@ -3,7 +3,7 @@
 Team:
 
 * Yesenia Ramirez - Service
-* 
+* Corey Edwards - Sales Microservice
 
 ## Design
 
