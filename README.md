@@ -19,5 +19,4 @@ off the microservice.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+My plan is to create the sales micro service to work in conjunction with the inverntory microservice make my models and views to show the list of my model. I will write the paths to my views and check my work on Insomnia. I will add to my view function to handle POST, PULL, GET, and DELETE requests. I will poll the car data to complete my requests and to finish it off I will create a React webpage for my microservice to function on.
