@@ -39,3 +39,6 @@ class SalesRecord(models.Model):
         on_delete=models.PROTECT,
     )
     price = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return "foo"

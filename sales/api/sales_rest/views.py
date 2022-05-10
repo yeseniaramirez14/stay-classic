@@ -67,12 +67,7 @@ class SalesRecordListEncoder(ModelEncoder):
         "price",
     ]
     def get_extra_data(self, o):
-        return {"automobile": o.automobile.vin}
-    def get_extra_data(self, o):
-        return {"sales_rep": o.sales_rep.name}
-    def get_extra_data(self, o):
-        return {"customer": o.customer.name}
-
+        return {"automobile": o.automobile.vin, "sales_rep": o.sales_rep.name, "customer": o.customer.name} 
 
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord
@@ -96,20 +91,26 @@ def api_list_salesreps(request):
         )
     else:
         content = json.loads(request.body)
-
-        try:
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=automobile_href)
-            content["automobile"] = automobile
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid automobile"},
-                status=400,
-            )
-        
         salesrep = SalesRep.objects.create(**content)
         return JsonResponse(
-            SalesRep,
+            salesrep,
             encoder=SalesRepDetailEncoder,
-            safe=False,
+            safe=False
+        )
+
+@require_http_methods(["GET", "POST"])
+def api_list_customers(request):
+    if request.method == "GET":
+        customers = Customer.objects.all()
+        return JsonResponse(
+            {"customer": customers},
+            encoder=CustomerListEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        customers = Customer.objects.create(**content)
+        return JsonResponse(
+            customers,
+            encoder=CustomerDetailEncoder,
+            safe=False
         )
