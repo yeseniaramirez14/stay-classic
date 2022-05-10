@@ -19,7 +19,7 @@ class SalesRep(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=150)
-    phone_number = models.PositiveSmallIntegerField()
+    phone_number = models.PositiveIntegerField()
 
 
 class SalesRecord(models.Model):
