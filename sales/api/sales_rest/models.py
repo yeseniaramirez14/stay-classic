@@ -13,7 +13,7 @@ class AutomobileVO(models.Model):
 
 class SalesRep(models.Model):
     name = models.CharField(max_length=50)
-    employee_number = models.PositiveSmallIntegerField()
+    employee_number = models.PositiveSmallIntegerField(unique=True)
 
 
 class Customer(models.Model):
@@ -39,6 +39,3 @@ class SalesRecord(models.Model):
         on_delete=models.PROTECT,
     )
     price = models.PositiveSmallIntegerField()
-
-    def __str__(self):
-        return "foo"

@@ -98,19 +98,46 @@ def api_list_salesreps(request):
             safe=False
         )
 
-@require_http_methods(["GET", "POST"])
-def api_list_customers(request):
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_show_salesrep(request, pk):
     if request.method == "GET":
-        customers = Customer.objects.all()
+        salesrep = SalesRep.objects.get(id=pk)
+
         return JsonResponse(
-            {"customer": customers},
+            {"salesrep": salesrep},
+            encoder = SalesRepDetailEncoder,
+        )
+    
+    elif request.method == "DELETE":
+        count, _ = SalesRep.objects.filter(id=pk).delete()
+        return JsonResponse(
+            {"deleted": count > 0}
+        )
+
+    else:
+        content = json.loads(request.body)
+        SalesRep.objects.filter(id=pk).update(**content)
+        salesrep = SalesRep.objects.get(id=pk)
+        return JsonResponse(
+            salesrep,
+            encoder=SalesRepDetailEncoder,
+            safe=False
+        )
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_customer(request):
+    if request.method == "GET":
+        customer = Customer.objects.all()
+        return JsonResponse(
+            {"customer": customer},
             encoder=CustomerListEncoder,
         )
     else:
         content = json.loads(request.body)
-        customers = Customer.objects.create(**content)
+        customer = Customer.objects.create(**content)
         return JsonResponse(
-            customers,
+            customer,
             encoder=CustomerDetailEncoder,
             safe=False
         )
