@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from pkg_resources import require
 from .models import Technician, AutomobileVO, Service
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
@@ -43,6 +44,42 @@ class ServiceDetailEncoder(ModelEncoder):
     encoders = {
         "automobile": AutomobileVODetailEncoder(),
     }
+
+class TechnicianListEncoder(ModelEncoder):
+    model = Technician
+    properties = [
+        "name",
+        "employee_number"
+    ]
+
+class TechnicianDetailEncoder(ModelEncoder):
+    model = Technician
+    properties = [
+        "name",
+        "employee_number"
+    ]
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_technicians(request):
+    if request.method == "GET":
+
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {"technicians": technicians},
+            encoder=TechnicianListEncoder,
+        )
+    
+    else:
+        content = json.loads(request.body)
+
+        technician = Technician.objects.create(**content)
+
+        return JsonResponse(
+            technician, 
+            encoder=TechnicianDetailEncoder,
+            safe=False
+        )
 
 
 @require_http_methods(["GET", "POST"])

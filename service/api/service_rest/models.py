@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Technician(models.Model):
     name = models.CharField(max_length=50)
-    employee_number = models.PositiveSmallIntegerField()
+    employee_number = models.PositiveSmallIntegerField(unique=True)
 
 
 class AutomobileVO(models.Model):
@@ -15,7 +15,7 @@ class Service(models.Model):
     vin = models.ForeignKey(
         AutomobileVO,
         related_name="automobile",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     customer = models.CharField(max_length=50)
     date = models.DateField()
