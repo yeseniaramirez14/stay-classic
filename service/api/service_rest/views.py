@@ -31,8 +31,7 @@ class ServiceListEncoder(ModelEncoder):
     properties = [
         "vin",
         "customer",
-        "date",
-        # "time",
+        "date_time",
         "technician",
         "reason",
         "is_vip",
@@ -47,8 +46,7 @@ class ServiceDetailEncoder(ModelEncoder):
     properties = [
         "vin",
         "customer",
-        "date",
-        "time",
+        "date_time",
         "technician",
         "reason",
         "is_vip",
