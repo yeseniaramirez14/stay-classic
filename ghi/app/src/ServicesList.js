@@ -11,6 +11,7 @@ class ServicesList extends React.Component {
     async componentDidMount() {
         const url = "http://localhost:8080/api/services/";
         const response = await fetch(url);
+        console.log(response)
 
         if (response.ok) {
             const data = await response.json();
@@ -23,20 +24,26 @@ class ServicesList extends React.Component {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Manufactuer</th>
-                        <th>Model</th>
-                        <th>Color</th>
-                        <th>Picture</th>
-                        <th>Bin</th>
-                        <th>Delete</th>
+                        <th>VIN</th>
+                        <th>Customer name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Technician</th>
+                        <th>Reason</th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.state.services.map(service => {
+                        console.log(service)
                         return (
-                            <td>
-                                {service.customer}
-                            </td>
+                            <tr key={service.vin}>
+                                <td>{service.vin}</td>
+                                <td>{service.customer}</td>
+                                <td>{service.date_time}</td>
+                                <td>{service.date_time}</td>
+                                <td>{service.technician.name}</td>
+                                <td>{service.reason}</td>
+                            </tr>
                         )
                     })}
                     {/* {props.shoes.map(shoe => {
