@@ -17,10 +17,10 @@ class AutomobileVO(models.Model):
 
 
 class Service(models.Model):
-    vin = models.CharField(max_length=50, unique=True)
+    vin = models.CharField(max_length=50)
     customer = models.CharField(max_length=50)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     technician = models.ForeignKey(
         Technician,
         related_name="technician",
