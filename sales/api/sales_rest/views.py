@@ -41,7 +41,6 @@ class CustomerListEncoder(ModelEncoder):
     ]
 
 
-
 class CustomerDetailEncoder(ModelEncoder):
     model = Customer
     properties = [
@@ -63,6 +62,11 @@ class SalesRecordListEncoder(ModelEncoder):
     ]
     def get_extra_data(self, o):
         return {"automobile": o.automobile.vin, "sales_rep": o.sales_rep.name, "customer": o.customer.name} 
+    encoders = {
+        "automobile": AutomobileVODetailEncoder(),
+        "sales_rep": SalesRepListEncoder(),
+        "customer": CustomerListEncoder(),
+    }
 
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord
@@ -73,7 +77,9 @@ class SalesRecordDetailEncoder(ModelEncoder):
         "price",
     ]
     encoders = {
-        "automobile": AutomobileVODetailEncoder()
+        "automobile": AutomobileVODetailEncoder(),
+        "sales_rep": SalesRepListEncoder(),
+        "customer": CustomerListEncoder(),
     }
 
 
@@ -165,3 +171,52 @@ def api_show_customer(request, pk):
             safe=False
         )
 
+@require_http_methods(["GET", "POST"])
+def api_list_salesrecords(request):
+    if request.method == "GET":
+        salesrecord = SalesRecord.objects.all()
+        return JsonResponse(
+            {"salesrecord": salesrecord},
+            encoder=SalesRecordListEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        print(content)
+
+
+        try:
+            automobile_vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=automobile_vin)
+            content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid automobile"},
+                status=400,
+            )
+
+        try:
+            sales_rep_name = content["sales_rep"]
+            sales_rep = SalesRep.objects.get(name=sales_rep_name)
+            content["sales_rep"] = sales_rep
+        except SalesRep.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid sales rep"},
+                status=400,
+            )
+
+        try:
+            customer_name = content["customer"]
+            customer = Customer.objects.get(name=customer_name)
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid customer"},
+                status=400,
+            )
+        
+        salesrecord = SalesRecord.objects.create(**content)
+        return JsonResponse(
+            salesrecord,
+            encoder=SalesRecordDetailEncoder,
+            safe=False,
+        )
