@@ -1,4 +1,6 @@
 import React from 'react';
+import { format } from 'date-fns';
+
 
 class ServicesList extends React.Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class ServicesList extends React.Component {
         }
     }
 
+
     render() {
         return (
             <table className="table">
@@ -26,8 +29,7 @@ class ServicesList extends React.Component {
                     <tr>
                         <th>VIN</th>
                         <th>Customer name</th>
-                        <th>Date</th>
-                        <th>Time</th>
+                        <th>Date and Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
                     </tr>
@@ -39,7 +41,6 @@ class ServicesList extends React.Component {
                             <tr key={service.vin}>
                                 <td>{service.vin}</td>
                                 <td>{service.customer}</td>
-                                <td>{service.date_time}</td>
                                 <td>{service.date_time}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
