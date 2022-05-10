@@ -20,7 +20,6 @@ class Service(models.Model):
     vin = models.CharField(max_length=50)
     customer = models.CharField(max_length=50)
     date_time = models.DateTimeField(null=True)
-    # time = models.TimeField(null=True)
     technician = models.ForeignKey(
         Technician,
         related_name="technician",
@@ -28,6 +27,7 @@ class Service(models.Model):
     )
     reason = models.CharField(max_length=100)
     is_vip = models.BooleanField(default=False)
+    status = models.
 
     def __str__(self):
         return f"{self.reason} for {self.customer}"

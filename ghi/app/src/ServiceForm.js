@@ -76,7 +76,7 @@ class ServiceForm extends React.Component {
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
                 <h1>Create a new service appointment</h1>
-                <form onSubmit={this.handleSubmit} id="create-presentation-form">
+                <form onSubmit={this.handleSubmit} id="create-service-form">
                   <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value={this.state.vin} placeholder="Vin" required type="text" id="vin" className="form-control" />
                     <label htmlFor="vin">Vin number</label>
