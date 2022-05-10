@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Technician(models.model):
+class Technician(models.Model):
     name = models.CharField(max_length=50)
     employee_number = models.PositiveSmallIntegerField()
 
@@ -11,10 +11,10 @@ class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
 
 
-class Service(models.model):
+class Service(models.Model):
     vin = models.ForeignKey(
         AutomobileVO,
-        related_name="vin",
+        related_name="automobile",
         on_delete=models.PROTECT,
     )
     customer = models.CharField(max_length=50)
