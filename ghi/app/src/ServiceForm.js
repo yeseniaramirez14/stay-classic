@@ -17,6 +17,7 @@ class ServiceForm extends React.Component {
     handleChange(event) {
         const newState = {}
         newState[event.target.id] = event.target.value;
+        // console.log(event)
         this.setState(newState)
     }
 
@@ -69,9 +70,6 @@ class ServiceForm extends React.Component {
         }
     }
 
-
-
-
     render() {
         return (
             <div className="row">
@@ -88,15 +86,15 @@ class ServiceForm extends React.Component {
                     <label htmlFor="customer">Customer name</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.dateTime} placeholder="Date and Time" type="datetime-local" id="date_time" className="form-control" />
-                    <label htmlFor="date_time">Date and Time</label>
+                    <input onChange={this.handleChange} value={this.state.dateTime} placeholder="Date and Time" type="datetime-local" id="dateTime" className="form-control" />
+                    <label htmlFor="dateTime">Date and Time</label>
                   </div>
                   <div className="mb-3">
                     <select onChange={this.handleChange} value={this.state.technician} required className="form-select" id="technician">
                       <option value="">Choose a technician</option>
                       {this.state.technicians.map(technician => {
                         return (
-                          <option key={technician.employee_number} value={technician.id}>{technician.name}</option>
+                          <option key={technician.employee_number} value={technician.employee_number}>{technician.name}</option>
                         )
                       })}
                     </select>
