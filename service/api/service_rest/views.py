@@ -45,12 +45,14 @@ class ServiceDetailEncoder(ModelEncoder):
         "automobile": AutomobileVODetailEncoder(),
     }
 
+
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
     properties = [
         "name",
         "employee_number"
     ]
+
 
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
@@ -95,11 +97,15 @@ def api_list_services(request, automobile_vo_id=None):
         )
     else:
         content = json.loads(request.body)
+        print(content)
 
         try:
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=automobile_href)
-            content["automobile"] = automobile
+            vin_number = content["vin"]
+            print(vin_number)
+            vin = AutomobileVO.objects.get(vin=vin_number)
+            print(AutomobileVO.objects.all())
+            content["vin"] = vin
+
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid automobile vin"},
