@@ -9,11 +9,8 @@ from .models import AutomobileVO, SalesRep, SalesRecord, Customer
 # Create your views here.
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = [
-        "color", 
-        "year", 
+    properties = [ 
         'vin',
-        "model",
     ]
 
 
@@ -78,6 +75,8 @@ class SalesRecordDetailEncoder(ModelEncoder):
     encoders = {
         "automobile": AutomobileVODetailEncoder()
     }
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_salesreps(request):
@@ -165,3 +164,4 @@ def api_show_customer(request, pk):
             encoder=CustomerDetailEncoder,
             safe=False
         )
+
