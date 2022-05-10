@@ -26,6 +26,7 @@ class ServicesList extends React.Component {
         }
     }
 
+
     render() {
         return (
             <table className="table">
@@ -36,6 +37,7 @@ class ServicesList extends React.Component {
                         <th>Date and Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,8 @@ class ServicesList extends React.Component {
                                 <td>{formatDate(service.date_time)}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
+                                <td> <button  type="button" className='btn btn-danger'>Cancel</button>
+                                 <button  type="button" className='btn btn-warning'>Finished</button></td>
                             </tr>
                         )
                     })}

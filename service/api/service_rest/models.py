@@ -27,7 +27,7 @@ class Service(models.Model):
     )
     reason = models.CharField(max_length=100)
     is_vip = models.BooleanField(default=False)
-    status = models.
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.reason} for {self.customer}"

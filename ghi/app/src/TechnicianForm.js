@@ -24,17 +24,6 @@ class TechnicianForm extends React.Component {
     //     this.setState({manufactuer: value})
     // }
 
-    async componentDidMount() {
-        const url = "http://localhost:8080/api/technicians/";
-    
-        const response = await fetch(url);
-    
-        if (response.ok) {
-          const data = await response.json();
-          this.setState({ technicians: data.technicians })
-          }
-        }
-
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
