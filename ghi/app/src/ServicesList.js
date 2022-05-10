@@ -1,4 +1,10 @@
 import React from 'react';
+// import { format } from 'date-fns';
+
+
+function formatDate(date) {
+    return date
+}
 
 class ServicesList extends React.Component {
     constructor(props) {
@@ -11,10 +17,15 @@ class ServicesList extends React.Component {
     async componentDidMount() {
         const url = "http://localhost:8080/api/services/";
         const response = await fetch(url);
+        console.log(`this is the response: ${response}`)
         console.log(response)
+
+
 
         if (response.ok) {
             const data = await response.json();
+            console.log(data)
+
             this.setState({ services: data.services})
         }
     }
@@ -26,8 +37,7 @@ class ServicesList extends React.Component {
                     <tr>
                         <th>VIN</th>
                         <th>Customer name</th>
-                        <th>Date</th>
-                        <th>Time</th>
+                        <th>Date and Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
                     </tr>
@@ -39,8 +49,7 @@ class ServicesList extends React.Component {
                             <tr key={service.vin}>
                                 <td>{service.vin}</td>
                                 <td>{service.customer}</td>
-                                <td>{service.date_time}</td>
-                                <td>{service.date_time}</td>
+                                <td>{formatDate(service.date_time)}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
                             </tr>

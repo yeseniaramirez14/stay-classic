@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import ServicesList from './ServicesList';
+import ServiceForm from './ServiceForm';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="services">
             <Route path="" element={<ServicesList />} />
+            <Route path="new/" element={<ServiceForm />} />
           </Route>
         </Routes>
       </div>
