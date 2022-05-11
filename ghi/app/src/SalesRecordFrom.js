@@ -28,13 +28,14 @@ class SalesRecordForm extends React.Component {
         const customerResponse = await fetch(customerUrl);
         const autoResponse = await fetch(autoUrl);
 
+
         if (autoResponse.ok && customerResponse.ok && autoResponse.ok) {
             const saleData = await salesResponse.json();
             const customerData = await customerResponse.json();
             const autoData = await autoResponse.json();
             this.setState({ 
-                salesReps: saleData.salesreps,
-                customers: customerData.customers,
+                salesReps: saleData.salesrep,
+                customers: customerData.customer,
                 autos: autoData.autos
              })
         }
@@ -51,7 +52,7 @@ class SalesRecordForm extends React.Component {
           delete data.autos;               
           console.log(data)
       
-          const salesRecordsUrl = 'http://localhost:8090/api/sales/';
+          const salesRecordsUrl = 'http://localhost:8090/api/salesrecords/';
           const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -100,11 +101,22 @@ class SalesRecordForm extends React.Component {
                         </select>
                       </div>
                 <div className="mb-3">
-                        <select onChange={this.handleChange} value={this.state.salesReps} required name="salesRep" id="salesRep" className="form-select">
+                        <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
                           <option value="">Choose a sales rep</option>
                           {this.state.salesReps.map(salesrep => {
                             return (
                               <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
+                            )
+                          })}
+                        </select>
+                      </div>  
+                <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
+                          <option value="">Choose a Customer</option>
+                          {console.log("test", this.state)}
+                          {this.state.customers.map(customer => {
+                            return (
+                              <option key={customer.name} value={customer.name}>{customer.name}</option>
                             )
                           })}
                         </select>
