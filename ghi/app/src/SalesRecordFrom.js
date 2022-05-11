@@ -25,13 +25,14 @@ class SalesRecordForm extends React.Component {
         const customerResponse = await fetch(customerUrl);
         const autoResponse = await fetch(autoUrl);
 
-        if (autoResponse.ok || customerResponse.ok || autoResponse.ok) {
+
+        if (autoResponse.ok && customerResponse.ok && autoResponse.ok) {
             const saleData = await salesResponse.json();
             const customerData = await customerResponse.json();
             const autoData = await autoResponse.json();
             this.setState({ 
-                salesReps: saleData.salesReps,
-                customers: customerData.customers,
+                salesReps: saleData.salesrep,
+                customers: customerData.customer,
                 autos: autoData.autos
              })
         }
@@ -83,38 +84,42 @@ class SalesRecordForm extends React.Component {
               <div className="shadow p-4 mt-4">
                 <h1>Create a new Sale Record</h1>
                 <form onSubmit={this.handleSubmit} id="create-salesrecord-form">
-                  <div className="mb-3">
-                    <select onChange={this.handleChange} value={this.state.auto} required name="automobile" id="automobile" className="form-select">
-                      <option value="">Choose an automobile</option>
-                      {this.state.autos.map(auto => {
-                        return (
-                          <option key={auto.href} value={auto.vin}>
-                              {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
-                          </option>
-                        )
-                      })}
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
-                      <option value="">Choose a sales rep</option>
-                      {this.state.salesReps.map(rep => {
-                        return (
-                          <option key={rep.employee_number} value={rep.name}>
-                            {rep.name}
-                          </option>
-                        )
-                      })}
-                      {/* {this.state.salesReps.map(salesRep => {
-                        return (
-                          <option key={salesRep.name} value={salesRep.name}>{salesRep.name}</option>
-                        )
-                      })} */}
-                    </select>
-                  </div>
-                  <div className="form-floating mb-3">
-                      <input onChange={this.handleChange} value={this.state.price} placeholder="price" type="text" id="price" className="form-control" />
-                      <label htmlFor="price">Price</label>
+                <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.automobile} required name="automobile" id="automobile" className="form-select">
+                          <option value="">Choose an automobile</option>
+                          {this.state.autos.map(auto => {
+                            return (
+                              <option key={auto.href} value={auto.vin}>
+                                  {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
+                          <option value="">Choose a sales rep</option>
+                          {this.state.salesReps.map(salesrep => {
+                            return (
+                              <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
+                            )
+                          })}
+                        </select>
+                      </div>  
+                <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
+                          <option value="">Choose a Customer</option>
+                          {console.log("test", this.state)}
+                          {this.state.customers.map(customer => {
+                            return (
+                              <option key={customer.name} value={customer.name}>{customer.name}</option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                <div className="form-floating mb-3">
+                    <input onChange={this.handleChange} value={this.state.price} placeholder="price" type="text" id="price" className="form-control" />
+                    <label htmlFor="price">Price</label>
                   </div>
                   <button className="btn btn-primary">Create</button>
                 </form>
