@@ -96,8 +96,8 @@ class ServiceHistory extends React.Component {
                 </thead>
                 <tbody>
                     {this.state.services.map(service => {
-                        let serviceToCompare = service
-                        // console.log(serviceToCompare)
+                        let date = Date.parse(service.date_time)
+                        const newDate = new Date(date)
                         let vipStatus = '';
                         let finishedStatus = ''
 
@@ -119,7 +119,7 @@ class ServiceHistory extends React.Component {
                             <tr key={service.id}>
                                 <td className={finishedStatus}>{service.vin}</td>
                                 <td className={finishedStatus}>{service.customer}</td>
-                                <td className={finishedStatus}>{formatDate(service.date_time)}</td>
+                                <td className={finishedStatus}>{ newDate.toLocaleString('en-US', {month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'numeric'})}</td>
                                 <td className={finishedStatus}>{service.technician.name}</td>
                                 <td className={finishedStatus}>{service.reason}</td>
                                 <td className={finishedStatus}>

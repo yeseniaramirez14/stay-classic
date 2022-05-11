@@ -71,6 +71,8 @@ class ServicesList extends React.Component {
                         console.log(this.state.services)
                         console.log(service.is_finished)
                         // let vip = '';
+                        let date = Date.parse(service.date_time)
+                        const newDate = new Date(date)
                         let vipStatus = '';
                         let finishedStatus = ''
                         if (service.is_vip === true) {
@@ -83,7 +85,8 @@ class ServicesList extends React.Component {
                             <tr key={service.vin}>
                                 <td className={finishedStatus}>{service.vin}</td>
                                 <td className={finishedStatus}>{service.customer}</td>
-                                <td className={finishedStatus}>{formatDate(service.date_time)}</td>
+                                <td className={finishedStatus}>{ newDate.toLocaleString('en-US', {month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'numeric'})}</td>
+                                {/* <td className={finishedStatus}>{formatDate(service.date_time)}</td> */}
                                 <td className={finishedStatus}>{service.technician.name}</td>
                                 <td className={finishedStatus}>{service.reason}</td>
                                 <td className={finishedStatus}>
