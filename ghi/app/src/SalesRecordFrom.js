@@ -78,9 +78,10 @@ class SalesRecordForm extends React.Component {
                 <h1>Create a new Sale Record</h1>
                 <form onSubmit={this.handleSubmit} id="create-salesrecord-form">
                   <div className="mb-3">
-                      <select onChange={this.handleChange} value={this.state.vin} required className="form-select" id="vin">
+                      <select onChange={this.handleChange} value={this.state.vins} required className="form-select" id="vin">
                         <option value="">Choose a VIN number</option>
                         {this.state.vin.map(vin => {
+                          console.log(vin)
                           return (
                             <option key={vin} value={vin}>{vin}</option>
                           )
