@@ -4,11 +4,10 @@ class SalesRecordForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            vin: [],
-            sales_rep: [],
-            customer: [],
+            vins: [],
+            salesReps: [],
+            customers: [],
             price: "",
-            reason: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,8 +27,10 @@ class SalesRecordForm extends React.Component {
     // }
 
     async componentDidMount() {
-        const url = "http://localhost:8090/api/salesrecords/";
-    
+        const vinsURL = "http://localhost:8090/api/salesrecords/";
+        const salesrepsURL = "http://localhost:8090/api/salesrecords/";
+        const customersURL = "http://localhost:8090/api/salesrecords/";
+
         const response = await fetch(url);
     
         if (response.ok) {
@@ -63,7 +64,6 @@ class SalesRecordForm extends React.Component {
                 vin: '',
                 customer: '',
                 dateTime: '',
-                technicians: [],
                 reason: '',
             };
             this.setState(cleared);
