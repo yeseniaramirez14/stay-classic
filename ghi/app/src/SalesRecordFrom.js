@@ -4,9 +4,6 @@ class SalesRecordForm extends React.Component {
   constructor(props) {        
       super(props);        
       this.state = {            
-          automobile: '',
-          salesRep: '',
-          customer: '', 
           price: '',
           salesReps: [],
           autos: [],
@@ -45,9 +42,8 @@ class SalesRecordForm extends React.Component {
         async handleSubmit(event) {
           event.preventDefault();
           const data = {...this.state};
-          data.sales_rep = data.salesRep;        
+          data.sales_rep = data.salesReps;        
           delete data.salesReps;
-          delete data.salesRep;
           delete data.customers;               
           delete data.autos;               
           console.log(data)
