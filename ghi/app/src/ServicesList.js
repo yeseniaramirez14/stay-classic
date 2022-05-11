@@ -1,9 +1,5 @@
 import React from 'react';
 
-function formatDate(date) {
-    return date
-}
-
 class ServicesList extends React.Component {
     constructor(props) {
         super(props)
@@ -73,6 +69,7 @@ class ServicesList extends React.Component {
                         // let vip = '';
                         let date = Date.parse(service.date_time)
                         const newDate = new Date(date)
+
                         let vipStatus = '';
                         let finishedStatus = ''
                         if (service.is_vip === true) {
