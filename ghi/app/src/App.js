@@ -9,6 +9,7 @@ import SalesRepList from './SalesRepList';
 import SalesRepForm from './SalesRepForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
+import ServiceHistory from './ServiceHistory';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="" element={<CustomerList />} />
             <Route path="new/" element={<CustomerForm />} />
           </Route>
+          <Route path="servicehistory" element={<ServiceHistory />} />
         </Routes>
       </div>
     </BrowserRouter>
