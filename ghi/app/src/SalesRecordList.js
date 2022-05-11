@@ -19,9 +19,11 @@ class SalesRecordList extends React.Component {
         if (response.ok) {
             const data = await response.json();
             console.log(data)
+
             
 
-            this.setState({ sales_records: data.sales_records})
+            this.setState({sales_records: data.salesrecord})
+            
         }
     }
 
@@ -37,15 +39,13 @@ class SalesRecordList extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.salesrecord.map(records => {
-                        console.log(this.state.records)
-                        console.log(records.id)
+                    {this.state.sales_records.map(salesrecord => {
                         return (
-                            <tr key={records.vin}>
-                                <td>{records.vin}</td>
-                                <td>{records.sales_rep.name}</td>
-                                <td>{records.customer.name}</td>
-                                <td>{records.price}</td>
+                            <tr key={salesrecord.automobile}>
+                                <td>{salesrecord.automobile}</td>
+                                <td>{salesrecord.sales_rep}</td>
+                                <td>{salesrecord.customer}</td>
+                                <td>{salesrecord.price}</td>
                             </tr>
                         )
                     })}
