@@ -10,6 +10,8 @@ class ServicesList extends React.Component {
         this.state = {
             services: []
         };
+        
+
     };
 
     async componentDidMount() {
@@ -26,6 +28,16 @@ class ServicesList extends React.Component {
         }
     }
 
+    async deleteService(service_id){
+        const deleteUrl = `http://localhost:8080/api/services/${service_id}/`;
+        const fetchConfig = {method: "delete"}        
+
+        const response = await fetch(deleteUrl, fetchConfig);
+        if (response.ok) {
+            console.log(`we deleted it`, response)
+            window.location.reload();
+        }
+    };
 
     render() {
         return (
@@ -42,7 +54,8 @@ class ServicesList extends React.Component {
                 </thead>
                 <tbody>
                     {this.state.services.map(service => {
-                        console.log(service)
+                        console.log(this.state.services)
+                        console.log(service.id)
                         return (
                             <tr key={service.vin}>
                                 <td>{service.vin}</td>
@@ -50,7 +63,7 @@ class ServicesList extends React.Component {
                                 <td>{formatDate(service.date_time)}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
-                                <td> <button  type="button" className='btn btn-danger'>Cancel</button>
+                                <td> <button onClick={() => this.deleteService(service.id)} type="button" className='btn btn-danger'>Cancel</button>
                                  <button  type="button" className='btn btn-warning'>Finished</button></td>
                             </tr>
                         )
