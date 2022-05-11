@@ -77,6 +77,21 @@ class SalesRecordForm extends React.Component {
               <div className="shadow p-4 mt-4">
                 <h1>Create a new Sale Record</h1>
                 <form onSubmit={this.handleSubmit} id="create-salesrecord-form">
+                  <div className="mb-3">
+                      <select onChange={this.handleChange} value={this.state.vins} required className="form-select" id="vin">
+                        <option value="">Choose a VIN number</option>
+                        {this.state.vin.map(vin => {
+                          console.log(vin)
+                          return (
+                            <option key={vin} value={vin}>{vin}</option>
+                          )
+                        })}
+                      </select>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange={this.handleChange} value={this.state.price} placeholder="price" type="text" id="price" className="form-control" />
+                    <label htmlFor="price">Price</label>
+                  </div>
                   <button className="btn btn-primary">Create</button>
                 </form>
               </div>
