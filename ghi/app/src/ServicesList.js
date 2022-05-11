@@ -15,7 +15,6 @@ class ServicesList extends React.Component {
     async componentDidMount() {
         const url = "http://localhost:8080/api/services/";
         const response = await fetch(url);
-        console.log(`this is the response: ${response}`)
         console.log(response)
 
         if (response.ok) {
@@ -37,9 +36,21 @@ class ServicesList extends React.Component {
         }
     };
 
-    // const hideRow(service_id) {
-    //     const services = this.state.services.map(())
-    // }
+    async serviceFinished(service_id){
+        const putURL = `http://localhost:8080/api/services/${service_id}/`;
+        const fetchConfig = {
+            method: "put", 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({is_finished: true})
+        }; 
+
+        const response = await fetch(putURL, fetchConfig);
+        console.log(response)
+        if (response.ok) {
+            console.log(`we changed it`, response)
+            window.location.reload();
+        }
+    };
 
     render() {
         return (
@@ -58,24 +69,28 @@ class ServicesList extends React.Component {
                 <tbody>
                     {this.state.services.map(service => {
                         console.log(this.state.services)
-                        console.log(service.is_vip)
+                        console.log(service.is_finished)
                         // let vip = '';
                         let vipStatus = '';
+                        let finishedStatus = ''
                         if (service.is_vip === true) {
                             vipStatus = 'Yes';
                         }
+                        if (service.is_finished === true) {
+                            finishedStatus = 'd-none'
+                        }
                         return (
                             <tr key={service.vin}>
-                                <td>{service.vin}</td>
-                                <td>{service.customer}</td>
-                                <td>{formatDate(service.date_time)}</td>
-                                <td>{service.technician.name}</td>
-                                <td>{service.reason}</td>
-                                <td className='vip'>
+                                <td className={finishedStatus}>{service.vin}</td>
+                                <td className={finishedStatus}>{service.customer}</td>
+                                <td className={finishedStatus}>{formatDate(service.date_time)}</td>
+                                <td className={finishedStatus}>{service.technician.name}</td>
+                                <td className={finishedStatus}>{service.reason}</td>
+                                <td className={finishedStatus}>
                                     {vipStatus}
                                 </td>
-                                <td> <button onClick={() => this.deleteService(service.id)} type="button" className='btn btn-danger'>Cancel</button>
-                                 <button type="button" className='btn btn-warning'>Finished</button></td>
+                                <td className={finishedStatus}> <button onClick={() => this.deleteService(service.id)} type="button" className='btn btn-danger'>Cancel</button>
+                                 <button onClick={() => this.serviceFinished(service.id)} type="button" className='btn btn-warning'>Finished</button></td>
                             </tr>
                         )
                     })}

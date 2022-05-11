@@ -36,6 +36,7 @@ class ServiceListEncoder(ModelEncoder):
         "technician",
         "reason",
         "is_vip",
+        "is_finished"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
@@ -80,11 +81,8 @@ def api_list_technicians(request):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_services(request, automobile_vo_id=None):
+def api_list_services(request):
     if request.method == "GET":
-        # if automobile_vo_id is not None:
-        #     services = Service.objects.filter(automobile=automobile_vo_id)
-        # else:
         services = Service.objects.all()
         return JsonResponse(
             {"services": services},
@@ -139,9 +137,21 @@ def api_list_services(request, automobile_vo_id=None):
             safe=False,
         )
 
-def api_delete_service(request, pk):
+
+@require_http_methods(["DELETE", "PUT"])
+def api_detail_services(request, pk):
     if request.method == "DELETE":
         count, _ = Service.objects.filter(id=pk).delete()
         return JsonResponse(
             {"deleted": count > 0}
         )
+    else:
+        content = json.loads(request.body)
+        Service.objects.filter(id=pk).update(**content)
+        service = Service.objects.get(id=pk)
+        return JsonResponse(
+            service,
+            encoder=ServiceDetailEncoder,
+            safe=False
+        )
+    
