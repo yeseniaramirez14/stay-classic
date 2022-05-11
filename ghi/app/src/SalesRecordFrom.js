@@ -8,6 +8,7 @@ class SalesRecordForm extends React.Component {
             sales_rep: [],
             customer: [],
             price: "",
+            reason: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,9 +34,41 @@ class SalesRecordForm extends React.Component {
     
         if (response.ok) {
           const data = await response.json();
-          this.setState({ sales_records: data.sales_records })
+          this.setState({ salesrecords: data.salesrecords })
           }
         }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        const data = {...this.state};
+        data.date_time = data.dateTime
+        delete data.dateTime
+        delete data.technicians
+        console.log(data)
+
+        const serviceURL = "http://localhost:8090/api/salesrecords/";
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        const response = await fetch(serviceURL, fetchConfig);
+        if (response.ok) {
+            const newService = await response.json();
+            console.log(newService)
+
+            const cleared = {
+                vin: '',
+                customer: '',
+                dateTime: '',
+                technicians: [],
+                reason: '',
+            };
+            this.setState(cleared);
+        }
+    }
 
     render() {
         return (
@@ -47,7 +80,7 @@ class SalesRecordForm extends React.Component {
                 <div className="mb-3">
                     <select onChange={this.handleChange} value={this.state.vin} required className="form-select" id="vin">
                       <option value="">Choose a VIN number</option>
-                      {this.state.vin.map(vin => {
+                      {this.state.automobile.map(vin => {
                         return (
                           <option key={vin} value={vin}>{vin}</option>
                         )
