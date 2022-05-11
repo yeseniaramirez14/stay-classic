@@ -45,7 +45,7 @@ function App() {
             <Route path="new/" element={<CustomerForm />} />
           </Route>
           <Route path="servicehistory" element={<ServiceHistory />} />
-          <Route path="tagetedrecords" element={<TargetedRecords />} />
+          <Route path="targetedrecords" element={<TargetedRecords />} />
           <Route path="manufacturers">
             <Route path="" element={<ManufacturersList />} />
             <Route path="new/" element={<CustomerForm />} />
