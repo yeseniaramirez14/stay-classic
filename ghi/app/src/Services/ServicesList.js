@@ -50,6 +50,8 @@ class ServicesList extends React.Component {
 
     render() {
         return (
+            <div>
+            <h1>List of Services</h1>
             <table className="table">
                 <thead>
                     <tr>
@@ -96,6 +98,7 @@ class ServicesList extends React.Component {
                     })}
                 </tbody>
             </table>
+            </div>
         );
     }
 }
