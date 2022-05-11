@@ -10,8 +10,6 @@ class ServicesList extends React.Component {
         this.state = {
             services: []
         };
-        
-
     };
 
     async componentDidMount() {
@@ -39,6 +37,10 @@ class ServicesList extends React.Component {
         }
     };
 
+    // const hideRow(service_id) {
+    //     const services = this.state.services.map(())
+    // }
+
     render() {
         return (
             <table className="table">
@@ -49,13 +51,19 @@ class ServicesList extends React.Component {
                         <th>Date and Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
+                        <th>VIP</th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.state.services.map(service => {
                         console.log(this.state.services)
-                        console.log(service.id)
+                        console.log(service.is_vip)
+                        // let vip = '';
+                        let vipStatus = '';
+                        if (service.is_vip === true) {
+                            vipStatus = 'Yes';
+                        }
                         return (
                             <tr key={service.vin}>
                                 <td>{service.vin}</td>
@@ -63,8 +71,11 @@ class ServicesList extends React.Component {
                                 <td>{formatDate(service.date_time)}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
+                                <td className='vip'>
+                                    {vipStatus}
+                                </td>
                                 <td> <button onClick={() => this.deleteService(service.id)} type="button" className='btn btn-danger'>Cancel</button>
-                                 <button  type="button" className='btn btn-warning'>Finished</button></td>
+                                 <button type="button" className='btn btn-warning'>Finished</button></td>
                             </tr>
                         )
                     })}
