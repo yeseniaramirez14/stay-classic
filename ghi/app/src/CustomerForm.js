@@ -53,15 +53,13 @@ class CustomerForm extends React.Component {
         };
         const response = await fetch(customersURL, fetchConfig);
         if (response.ok) {
-            const newService = await response.json();
-            console.log(newService)
+            const newCustomer = await response.json();
+            console.log(newCustomer)
 
             const cleared = {
-                vin: '',
-                customer: '',
-                dateTime: '',
-                technicians: [],
-                reason: '',
+                name: '',
+                address: '',
+                phoneNumber: ''
             };
             this.setState(cleared);
         }
@@ -72,33 +70,19 @@ class CustomerForm extends React.Component {
             <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
-                <h1>Create a new service appointment</h1>
-                <form onSubmit={this.handleSubmit} id="create-service-form">
+                <h1>Create a new Customer</h1>
+                <form onSubmit={this.handleSubmit} id="create-customer-form">
                   <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.vin} placeholder="Vin" required type="text" id="vin" className="form-control" />
-                    <label htmlFor="vin">Vin number</label>
+                    <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
+                    <label htmlFor="name">Name</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.customer} placeholder="Cutomer name" required type="text" id="customer" className="form-control" />
-                    <label htmlFor="customer">Customer name</label>
+                    <input onChange={this.handleChange} value={this.state.address} placeholder="Address" required type="text" id="address" className="form-control" />
+                    <label htmlFor="address">Address</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.dateTime} placeholder="Date and Time" type="datetime-local" id="dateTime" className="form-control" />
-                    <label htmlFor="dateTime">Date and Time</label>
-                  </div>
-                  <div className="mb-3">
-                    <select onChange={this.handleChange} value={this.state.technician} required className="form-select" id="technician">
-                      <option value="">Choose a technician</option>
-                      {this.state.technicians.map(technician => {
-                        return (
-                          <option key={technician.employee_number} value={technician.employee_number}>{technician.name}</option>
-                        )
-                      })}
-                    </select>
-                  </div>
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.reason} placeholder="Reason" type="text" id="reason" className="form-control" />
-                    <label htmlFor="reason">Reason</label>
+                    <input onChange={this.handleChange} value={this.state.phoneNumber} placeholder="Phone number" required type="text" id="phoneNumber" className="form-control" />
+                    <label htmlFor="phoneNumber">Phone number</label>
                   </div>
                   <button className="btn btn-primary">Create</button>
                 </form>
