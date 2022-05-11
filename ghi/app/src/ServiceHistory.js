@@ -20,13 +20,22 @@ class ServiceHistory extends React.Component {
         this.setState(newState)
     }
 
+    async handleVinSearchSubmit(event) {
+        event.preventDefault();
+        // const searchURL = `http://localhost:3000/servicehistory?name=${this.state.search}`
+        const searchURL = `http://localhost:3000/servicehistory`
+        const fetchConfig = {
+            method: "get"
+        };
+        const response = await fetch(searchURL, fetchConfig)
+    }
+
     async componentDidMount() {
         const url = "http://localhost:8080/api/services/";
         const response = await fetch(url);
 
         if (response.ok) {
             const data = await response.json();
-
             this.setState({ services: data.services})
         }
     }
@@ -60,19 +69,20 @@ class ServiceHistory extends React.Component {
         return (
             <div>
             <div>
-                <form onSubmit={this.filterServices}>
+                <form onSubmit={this.handleVinSearchSubmit}>
                 <input
                     type="text"
                     id="search"
                     value={this.state.search}
                     placeholder="Search VIN numbers"
-                    name="s"
+                    name="vin"
                     onChange={this.handleChange}
                 />
                 <button>Search</button>
                 {/* <button type="submit">Search</button> */}
         </form>
             </div>
+            <h1>Service History</h1>
             <table className="table">
                 <thead>
                     <tr>
@@ -106,7 +116,7 @@ class ServiceHistory extends React.Component {
                             finishedStatus = 'd-none'
                         }
                         return (
-                            <tr key={service.vin}>
+                            <tr key={service.id}>
                                 <td className={finishedStatus}>{service.vin}</td>
                                 <td className={finishedStatus}>{service.customer}</td>
                                 <td className={finishedStatus}>{formatDate(service.date_time)}</td>
