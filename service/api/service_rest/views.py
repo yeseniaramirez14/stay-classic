@@ -29,6 +29,7 @@ class TechnicianEncoder(ModelEncoder):
 class ServiceListEncoder(ModelEncoder): 
     model = Service
     properties = [
+        "id",
         "vin",
         "customer",
         "date_time",
@@ -136,4 +137,11 @@ def api_list_services(request, automobile_vo_id=None):
             services,
             encoder = ServiceDetailEncoder,
             safe=False,
+        )
+
+def api_delete_service(request, pk):
+    if request.method == "DELETE":
+        count, _ = Service.objects.filter(id=pk).delete()
+        return JsonResponse(
+            {"deleted": count > 0}
         )
