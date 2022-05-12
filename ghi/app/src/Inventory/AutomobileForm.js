@@ -13,11 +13,13 @@ class AutomobileForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     handleChange(event) {
         const newState = {}
         newState[event.target.id] = event.target.value;
         this.setState(newState)
     }
+
 
     async componentDidMount() {
         const url = "http://localhost:8100/api/models/";
@@ -28,6 +30,7 @@ class AutomobileForm extends React.Component {
           this.setState({ models: data.models })
           }
         }
+
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -45,6 +48,7 @@ class AutomobileForm extends React.Component {
                 'Content-Type': 'application/json'
             },
         };
+        
         const response = await fetch(URL, fetchConfig);
         if (response.ok) {
             const newAutomobile = await response.json();
@@ -62,11 +66,11 @@ class AutomobileForm extends React.Component {
 
     render() {
         return (
-            <div className="row">
+          <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
                 <h1>Create a New Automobile</h1>
-                <form onSubmit={this.handleSubmit} id="create-manufacturer-form">
+                <form onSubmit={this.handleSubmit} id="create-automobile-form">
                   <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value={this.state.color} placeholder="Color" required type="text" id="color" className="form-control" />
                     <label htmlFor="color">Color</label>
@@ -81,7 +85,7 @@ class AutomobileForm extends React.Component {
                   </div>
                   <div className="mb-3">
                     <select onChange={this.handleChange} value={this.state.model} required className="form-select" id="model">
-                      <option value="">Choose a automobile model</option>
+                      <option value="">Choose an automobile model</option>
                       {this.state.models.map(model => {
                         return (
                           <option key={model.id} value={model.id}>{model.name}</option>

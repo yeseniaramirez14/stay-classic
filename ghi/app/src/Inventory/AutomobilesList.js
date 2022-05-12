@@ -8,6 +8,7 @@ class AutomobilesList extends React.Component {
         };
     };
 
+
     async componentDidMount() {
         const url = "http://localhost:8100/api/automobiles/";
         const response = await fetch(url);
@@ -20,6 +21,7 @@ class AutomobilesList extends React.Component {
             this.setState({ automobiles: data.autos})
         }
     }
+
 
     render() {
         return (
@@ -45,7 +47,7 @@ class AutomobilesList extends React.Component {
                                     <td>{automobile.color}</td>
                                     <td>{automobile.year}</td>
                                     <td>{automobile.vin}</td>
-                                    <td><img src={ automobile.model.picture_url } alt="car picture" width="10%" height="10%" /></td>
+                                    <td><img src={ automobile.model.picture_url } alt="car" width="10%" height="10%" /></td>
                                 </tr>
                             )
                         })}
@@ -54,6 +56,6 @@ class AutomobilesList extends React.Component {
             </div>
         );
     }
-
 }
+
 export default AutomobilesList;

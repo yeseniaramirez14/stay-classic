@@ -11,18 +11,13 @@ class TechnicianForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     handleChange(event) {
         const newState = {}
         newState[event.target.id] = event.target.value;
-        // console.log(event)
         this.setState(newState)
     }
 
-    // As an example to reference
-    // handleemployeeNumberChange(event) {
-    //     const value = event.target.value;
-    //     this.setState({manufactuer: value})
-    // }
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -40,6 +35,7 @@ class TechnicianForm extends React.Component {
                 'Content-Type': 'application/json'
             },
         };
+
         const response = await fetch(technicianURL, fetchConfig);
         if (response.ok) {
             const newService = await response.json();
@@ -56,23 +52,23 @@ class TechnicianForm extends React.Component {
     render() {
         return (
             <div className="row">
-            <div className="offset-3 col-6">
-              <div className="shadow p-4 mt-4">
-                <h1>Create a new technician</h1>
-                <form onSubmit={this.handleSubmit} id="create-technician-form">
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
-                    <label htmlFor="name">Name</label>
-                  </div>
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.employeeNumber} placeholder="Employee number" required type="text" id="employeeNumber" className="form-control" />
-                    <label htmlFor="employeeNumber">Employee number</label>
-                  </div>
-                  <button className="btn btn-primary">Create</button>
-                </form>
+              <div className="offset-3 col-6">
+                <div className="shadow p-4 mt-4">
+                  <h1>Create a New Technician</h1>
+                  <form onSubmit={this.handleSubmit} id="create-technician-form">
+                    <div className="form-floating mb-3">
+                      <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
+                      <label htmlFor="name">Name</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                      <input onChange={this.handleChange} value={this.state.employeeNumber} placeholder="Employee number" required type="text" id="employeeNumber" className="form-control" />
+                      <label htmlFor="employeeNumber">Employee number</label>
+                    </div>
+                    <button className="btn btn-primary">Create</button>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
         );
     }
 }

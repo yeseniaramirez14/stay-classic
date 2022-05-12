@@ -22,7 +22,7 @@ def poll():
                 AutomobileVO.objects.update_or_create(
                     vin=auto["vin"],
                 )
-                print("polling is working")
+                print("service polling is working")
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(30)

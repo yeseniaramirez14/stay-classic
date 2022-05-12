@@ -68,7 +68,7 @@ class ServiceForm extends React.Component {
             <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
-                <h1>Create a new service appointment</h1>
+                <h1>Create a New Service Appointment</h1>
                 <form onSubmit={this.handleSubmit} id="create-service-form">
                   <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value={this.state.vin} placeholder="Vin" required type="text" id="vin" className="form-control" />
@@ -87,14 +87,14 @@ class ServiceForm extends React.Component {
                       <option value="">Choose a technician</option>
                       {this.state.technicians.map(technician => {
                         return (
-                          <option key={technician.employee_number} value={technician.employee_number}>{technician.name}</option>
+                          <option key={technician.id} value={technician.employee_number}>{technician.name}</option>
                         )
                       })}
                     </select>
                   </div>
                   <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value={this.state.reason} placeholder="Reason" type="text" id="reason" className="form-control" />
-                    <label htmlFor="reason">Reason</label>
+                    <label htmlFor="reason">Reason for service</label>
                   </div>
                   <button className="btn btn-primary">Create</button>
                 </form>

@@ -22,7 +22,8 @@ class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
         "name",
-        "employee_number"
+        "employee_number",
+        "id"
     ]
 
 
@@ -88,14 +89,13 @@ def api_list_services(request):
             {"services": services},
             encoder=ServiceListEncoder,
         )
+
     else:
         content = json.loads(request.body)
-        print(content)
 
         try:
             technician_number = content["technician"]
             technician = Technician.objects.get(employee_number=technician_number)
-            print(technician)
             content["technician"] = technician 
         except Technician.DoesNotExist:
             return JsonResponse(
@@ -103,34 +103,14 @@ def api_list_services(request):
                 status = 400,
             )
         
-
         vin_number = content["vin"]
-        print("hello")
-        print(AutomobileVO.objects.all())
+
         if AutomobileVO.objects.filter(vin=vin_number).exists():
             content["is_vip"] = True
-            print("this is working")
-        # if vin_number in AutomobileVO.objects.all():
-
-        #     print("it is vip")
         else:
             content["is_vip"] = False
-            print("it is not vip")
             
-        # try:
-        #     vin_number = content["vin"]
-        #     print(vin_number)
-        #     vin = AutomobileVO.objects.get(vin=vin_number)
-        #     print(AutomobileVO.objects.all())
-        #     content["vin"] = vin
-        # except AutomobileVO.DoesNotExist:
-        #     return JsonResponse(
-        #         {"message": "Invalid automobile vin"},
-        #         status = 400,
-        #     )
-
         services = Service.objects.create(**content)
-        print(services)
         return JsonResponse(
             services,
             encoder = ServiceDetailEncoder,

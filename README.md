@@ -12,10 +12,13 @@ Team:
 I will install the service app into the inventory microservice and
 make my models and views to show the list of my model. I will write 
 the paths to my views and check my work on Insomnia. I will add to 
-my view function to handle POST requests. Build a React component
-to fetch and show the list in the Web page. I will poll the car data.
-I will implement the delete request and add a delete button to finish
-off the microservice. 
+my view function to handle POST requests. That will complete my
+back end. Then I will begin on the front-end by polling for the 
+automobiles for the vin. Then I will begin creating my React files 
+and building my React components to fetch and show the lists and 
+complete the forms. I will implement the delete request for the 
+cancel button and d-none for my finished projects. Then I will
+work on the search bar for the service history. 
 
 ## Sales microservice
 

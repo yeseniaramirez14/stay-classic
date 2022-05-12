@@ -8,6 +8,7 @@ class ManufacturersList extends React.Component {
         };
     };
 
+
     async componentDidMount() {
         const url = "http://localhost:8100/api/manufacturers/";
         const response = await fetch(url);
@@ -20,6 +21,7 @@ class ManufacturersList extends React.Component {
             this.setState({ manufacturers: data.manufacturers})
         }
     }
+
 
     render() {
         return (
@@ -44,6 +46,6 @@ class ManufacturersList extends React.Component {
             </div>
         );
     }
-
 }
+
 export default ManufacturersList;

@@ -34,7 +34,6 @@ class TechniciansList extends React.Component {
                     </thead>
                     <tbody>
                         {this.state.technicians.map(technician => {
-                            console.log(technician)
                             return (
                                 <tr key={technician.employee_number}>
                                     <td>{technician.name}</td>
@@ -47,6 +46,6 @@ class TechniciansList extends React.Component {
             </div>
         );
     }
-
 }
+
 export default TechniciansList;

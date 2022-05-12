@@ -10,11 +10,13 @@ class ManufacturerForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     handleChange(event) {
         const newState = {}
         newState[event.target.id] = event.target.value;
         this.setState(newState)
     }
+
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -44,19 +46,19 @@ class ManufacturerForm extends React.Component {
     render() {
         return (
             <div className="row">
-            <div className="offset-3 col-6">
-              <div className="shadow p-4 mt-4">
-                <h1>Create a New Manufacturer</h1>
-                <form onSubmit={this.handleSubmit} id="create-manufacturer-form">
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
-                    <label htmlFor="name">Name</label>
-                  </div>
-                  <button className="btn btn-primary">Create</button>
-                </form>
-              </div>
+                <div className="offset-3 col-6">
+                    <div className="shadow p-4 mt-4">
+                        <h1>Create a New Manufacturer</h1>
+                        <form onSubmit={this.handleSubmit} id="create-manufacturer-form">
+                        <div className="form-floating mb-3">
+                            <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
+                            <label htmlFor="name">Name</label>
+                        </div>
+                        <button className="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
         );
     }
 }
