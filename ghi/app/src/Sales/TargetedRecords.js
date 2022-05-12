@@ -1,12 +1,13 @@
 import React from 'react';
-import { ReactFragment } from 'react';
+
 
 class TargetedRecords extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            targetedRecords: []
+        this.state = {           
+            sales_records: []           
         };
+        console.log("BUG", this.state)
     };
 
     async componentDidMount() {
@@ -23,13 +24,26 @@ class TargetedRecords extends React.Component {
 
             this.setState({sales_records: data.salesrecord})
             
+            
         }
+        
     }
 
     render() {
         return (
             <div>
-                <h1>Automobiles List</h1>
+                <h1>Targeted Sales Records</h1>
+                <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
+                          <option value="">Choose a sales rep</option>
+                          {console.log("test", this.state)}
+                          {this.state.salesReps.map(salesrep => {
+                            return (
+                              <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
+                            )
+                          })}
+                        </select>
+                      </div>
                 <table className="table">
                     <thead>
                         <tr>
@@ -59,6 +73,7 @@ class TargetedRecords extends React.Component {
             </div>
         );
     }
-
 }
+
+
 export default TargetedRecords;
