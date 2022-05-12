@@ -8,6 +8,7 @@ class ServiceForm extends React.Component {
             customer: '',
             dateTime: '',
             technicians: [],
+            technician: '',
             reason: '',
         };
         this.handleChange = this.handleChange.bind(this);
@@ -56,7 +57,7 @@ class ServiceForm extends React.Component {
                 vin: '',
                 customer: '',
                 dateTime: '',
-                technicians: [],
+                technician: '',
                 reason: '',
             };
             this.setState(cleared);

@@ -6,6 +6,7 @@ class VehicleModelForm extends React.Component {
         this.state = {
             name: '',
             manufacturers: [],
+            manufacturer: '',
             photo: '',
         };
         this.handleChange = this.handleChange.bind(this);
@@ -57,7 +58,7 @@ class VehicleModelForm extends React.Component {
 
             const cleared = {
                 name: '',
-                manufacturers: [],
+                manufacturer: '',
                 photo: '',
             };
             this.setState(cleared);
