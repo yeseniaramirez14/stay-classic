@@ -17,15 +17,8 @@ class ServiceForm extends React.Component {
     handleChange(event) {
         const newState = {}
         newState[event.target.id] = event.target.value;
-        // console.log(event)
         this.setState(newState)
     }
-
-    // As an example to reference
-    // handleCustomerChange(event) {
-    //     const value = event.target.value;
-    //     this.setState({manufactuer: value})
-    // }
 
     async componentDidMount() {
         const url = "http://localhost:8080/api/technicians/";
