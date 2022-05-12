@@ -8,6 +8,7 @@ class AutomobileForm extends React.Component {
             year: '',
             vin: '',
             models: [],
+            model: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,7 +59,7 @@ class AutomobileForm extends React.Component {
                 color: '',
                 year: '',
                 vin: '',
-                models: [],
+                model: '',
             };
             this.setState(cleared);
         }
