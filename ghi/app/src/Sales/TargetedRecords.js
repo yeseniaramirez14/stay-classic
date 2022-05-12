@@ -5,9 +5,14 @@ class TargetedRecords extends React.Component {
     constructor(props) {
         super(props)
         this.state = {           
-            sales_records: []           
+            sales_records: [],
+            salesReps: [],         
         };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     };
+    
 
     handleChange(event) {
         const newState = {}
@@ -16,32 +21,51 @@ class TargetedRecords extends React.Component {
     }
 
 
-
-    async handleRepChangeSubmit(event) {
-        event.preventDefault();
-        const repchangeURL = `http://localhost:8090/salesreps/`
-        const fetchConfig = {
-            method: "get"
-        };
-        const response = await fetch(repchangeURL, fetchConfig)
-    }
-
     
     async componentDidMount() {
+        const salesUrl = "http://localhost:8090/api/salesreps/";
         const url = "http://localhost:8090/api/salesrecords/";
+        const salesResponse = await fetch(salesUrl);
         const response = await fetch(url);
         console.log(response)
 
-        if (response.ok) {
+        if (response.ok && salesResponse.ok) {
+            const saleData = await salesResponse.json();
             const data = await response.json();
             console.log(data)
 
             
 
-            this.setState({sales_records: data.salesrecord})
+            this.setState({
+                sales_records: data.salesrecord,
+                salesReps: saleData.salesrep,
+            })
             
         }
     }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        const data = {...this.state};
+        data.sales_rep = data.salesReps;        
+        delete data.salesReps;
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          };
+          const response = await fetch(fetchConfig);
+          if (response.ok) {
+            const newName = await response.json();
+            console.log(newName)          
+            const cleared = {
+              salesRep: ''
+            }
+            this.setState(cleared);
+          }
+        }
 
     render() {
         return (
@@ -50,10 +74,9 @@ class TargetedRecords extends React.Component {
                 <div className="mb-3">
                         <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
                           <option value="">Choose a sales rep</option>
-                          {console.log("test", this.state)}
-                          {this.state.sales_records.map(salesrecord => {
+                          {this.state.salesReps.map(salesrep => {
                             return (
-                              <option key={salesrecord.sales_rep} value={salesrecord.sales_rep}>{salesrecord.sales_rep}</option>
+                              <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
                             )
                           })}
                         </select>
@@ -69,6 +92,8 @@ class TargetedRecords extends React.Component {
                 </thead>
                 <tbody>
                     {this.state.sales_records.map(salesrecord => {
+                        if (this.state.salesRep === salesrecord.sales_rep){
+                        
                         return (
                             <tr key={salesrecord.automobile}>
                                 <td>{salesrecord.automobile}</td>
@@ -77,6 +102,7 @@ class TargetedRecords extends React.Component {
                                 <td>{salesrecord.price}</td>
                             </tr>
                         )
+                    }
                     })}
                 </tbody>
             </table>
