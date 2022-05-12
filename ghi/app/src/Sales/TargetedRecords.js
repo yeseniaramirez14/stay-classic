@@ -7,7 +7,6 @@ class TargetedRecords extends React.Component {
         this.state = {           
             sales_records: []           
         };
-        console.log("BUG", this.state)
     };
 
     async componentDidMount() {
@@ -24,9 +23,7 @@ class TargetedRecords extends React.Component {
 
             this.setState({sales_records: data.salesrecord})
             
-            
         }
-        
     }
 
     render() {
@@ -45,31 +42,27 @@ class TargetedRecords extends React.Component {
                         </select>
                       </div>
                 <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Manufacturer</th>
-                            <th>Model</th>
-                            <th>Color</th>
-                            <th>Year</th>
-                            <th>VIN</th>
-                            <th>Photo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.automobiles.map(automobile => {
-                            return (
-                                <tr key={automobile.id}>
-                                    <td>{automobile.model.manufacturer.name}</td>
-                                    <td>{automobile.model.name}</td>
-                                    <td>{automobile.color}</td>
-                                    <td>{automobile.year}</td>
-                                    <td>{automobile.vin}</td>
-                                    <td><img src={ automobile.model.picture_url } alt="car picture" width="10%" height="10%" /></td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                <thead>
+                    <tr>
+                        <th>Automobile</th>
+                        <th>Sales Rep</th>
+                        <th>Customer</th>
+                        <th>Sale Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.sales_records.map(salesrecord => {
+                        return (
+                            <tr key={salesrecord.automobile}>
+                                <td>{salesrecord.automobile}</td>
+                                <td>{salesrecord.sales_rep}</td>
+                                <td>{salesrecord.customer}</td>
+                                <td>{salesrecord.price}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
             </div>
         );
     }
