@@ -9,6 +9,24 @@ class TargetedRecords extends React.Component {
         };
     };
 
+    handleChange(event) {
+        const newState = {}
+        newState[event.target.id] = event.target.value;
+        this.setState(newState)
+    }
+
+
+
+    async handleRepChangeSubmit(event) {
+        event.preventDefault();
+        const repchangeURL = `http://localhost:8090/salesreps/`
+        const fetchConfig = {
+            method: "get"
+        };
+        const response = await fetch(repchangeURL, fetchConfig)
+    }
+
+    
     async componentDidMount() {
         const url = "http://localhost:8090/api/salesrecords/";
         const response = await fetch(url);
@@ -33,9 +51,9 @@ class TargetedRecords extends React.Component {
                         <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
                           <option value="">Choose a sales rep</option>
                           {console.log("test", this.state)}
-                          {this.state.sales_records.map(salesrep => {
+                          {this.state.sales_records.map(salesrecord => {
                             return (
-                              <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
+                              <option key={salesrecord.sales_rep} value={salesrecord.sales_rep}>{salesrecord.sales_rep}</option>
                             )
                           })}
                         </select>
