@@ -12,7 +12,6 @@ class TargetedRecords extends React.Component {
     async componentDidMount() {
         const url = "http://localhost:8090/api/salesrecords/";
         const response = await fetch(url);
-        console.log(`this is the response: ${response}`)
         console.log(response)
 
         if (response.ok) {
@@ -34,7 +33,7 @@ class TargetedRecords extends React.Component {
                         <select onChange={this.handleChange} value={this.state.salesRep} required name="salesRep" id="salesRep" className="form-select">
                           <option value="">Choose a sales rep</option>
                           {console.log("test", this.state)}
-                          {this.state.salesReps.map(salesrep => {
+                          {this.state.sales_records.map(salesrep => {
                             return (
                               <option key={salesrep.name} value={salesrep.name}>{salesrep.name}</option>
                             )
