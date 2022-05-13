@@ -55,6 +55,17 @@ These three bounded contexts are connected with the Automobile model in the Inve
 
 ## Service microservice
 
+The service microservice will have 3 models: Technician, Service and AutomobileVO. 
+
+    1. Technician
+        - The Technician model will allow an employee to create a technician with a name and employee number. The employee has to be unique. 
+    2. AutomobileVO
+        - The AutomobileVO model will poll data from the Inventory microservice so the Service microservice has access to the automobile's VINs. 
+    3. Service
+        - The Service model will allow an employee to create a service appointment. To create a service appointment, you need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
+        - The Service model also has two additional properties: is_vip and is_finished
+            - is_vip is how I am able to track if an automobile was in our inventory and now sold okay
+
 I will install the service app into the inventory microservice and
 make my models and views to show the list of my model. I will write 
 the paths to my views and check my work on Insomnia. I will add to 
@@ -68,5 +79,4 @@ work on the search bar for the service history.
 
 ## Sales microservice
 
-In my sales microservice. I wanted to start with the customer and the sales reps because these two components are the least reliant on the others becuase in order for any of these
-sales to happen we need to have cars in the inventory which requires a make and a model and the car in the inventory which is a process but once those requiresments have been met then you can go and begin to create a sales record which is almost entirely reliant on the fact that these component exist. So you can input a car from the inventory, a sales rep, a customer, and input your own price for the car and it will be sold! This will be documented in the sales records. If you really wanted to observe your employees you can go to the targeted sales records page and check to see which of your sales reps have sold what without the hassle of looking through every single record. : )
+Inside of the sales microservice i have 4 models my AutomobileVO so i can poll for the VIN numbers for the cars in my inventory and thus making this entire thing function. Creation of a customer and a sales rep is mandatory as well but are things that can stand alone so not much to worry about there. Now the sales records are where the fun begins. The sales records only stand alone piece of information is the fact that you set the price. The rest of it is using data provided from you sales rep list, you customer list, and the Automobile vin numbers we polled in the beginning. Then and only then can you create a proper sales record. We also included a targeted sales record list so that way you can check the sales records of specific employees without having to read every sales record. Creation posts our data we have ways to get it with the use of the lists and if you need to delete something we included our models in the admin section.
