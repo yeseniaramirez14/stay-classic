@@ -55,6 +55,17 @@ These three bounded contexts are connected with the Automobile model in the Inve
 
 ## Service microservice
 
+The service microservice will have 3 models: Technician, Service and AutomobileVO. 
+
+    1. Technician
+        - The Technician model will allow an employee to create a technician with a name and employee number. The employee has to be unique. 
+    2. AutomobileVO
+        - The AutomobileVO model will poll data from the Inventory microservice so the Service microservice has access to the automobile's VINs. 
+    3. Service
+        - The Service model will allow an employee to create a service appointment. To create a service appointment, you need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
+        - The Service model also has two additional properties: is_vip and is_finished
+            - is_vip is how I am able to track if an automobile was in our inventory and now sold 
+
 I will install the service app into the inventory microservice and
 make my models and views to show the list of my model. I will write 
 the paths to my views and check my work on Insomnia. I will add to 
