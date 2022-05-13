@@ -64,7 +64,7 @@ The service microservice will have 3 models: Technician, Service and AutomobileV
     3. Service
         - The Service model will allow an employee to create a service appointment. To create a service appointment, you need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
         - The Service model also has two additional properties: is_vip and is_finished
-            - is_vip is how I am able to track if an automobile was in our inventory and now sold 
+            - is_vip is how I am able to track if an automobile was in our inventory and now sold okay
 
 I will install the service app into the inventory microservice and
 make my models and views to show the list of my model. I will write 
