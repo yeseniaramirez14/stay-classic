@@ -55,17 +55,6 @@ These three bounded contexts are connected with the Automobile model in the Inve
 
 ## Service microservice
 
-The service microservice will have 3 models: Technician, Service and AutomobileVO. 
-
-    1. Technician
-        - The Technician model will allow an employee to create a technician with a name and employee number. The employee has to be unique. 
-    2. AutomobileVO
-        - The AutomobileVO model will poll data from the Inventory microservice so the Service microservice has access to the automobile's VINs. 
-    3. Service
-        - The Service model will allow an employee to create a service appointment. To create a service appointment, you need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
-        - The Service model also has two additional properties: is_vip and is_finished
-            - is_vip is how I am able to track if an automobile was in our inventory and now sold 
-
 I will install the service app into the inventory microservice and
 make my models and views to show the list of my model. I will write 
 the paths to my views and check my work on Insomnia. I will add to 
@@ -79,4 +68,5 @@ work on the search bar for the service history.
 
 ## Sales microservice
 
-My plan is to create the sales micro service to work in conjunction with the inverntory microservice make my models and views to show the list of my model. I will write the paths to my views and check my work on Insomnia. I will add to my view function to handle POST, PULL, GET, and DELETE requests. I will poll the car data to complete my requests and to finish it off I will create a React webpage for my microservice to function on.
+In my sales microservice. I wanted to start with the customer and the sales reps because these two components are the least reliant on the others becuase in order for any of these
+sales to happen we need to have cars in the inventory which requires a make and a model and the car in the inventory which is a process but once those requiresments have been met then you can go and begin to create a sales record which is almost entirely reliant on the fact that these component exist. So you can input a car from the inventory, a sales rep, a customer, and input your own price for the car and it will be sold! This will be documented in the sales records. If you really wanted to observe your employees you can go to the targeted sales records page and check to see which of your sales reps have sold what without the hassle of looking through every single record. : )
