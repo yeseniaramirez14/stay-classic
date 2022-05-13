@@ -7,7 +7,7 @@ class SalesRecordForm extends React.Component {
           price: '',
           salesReps: [],
           autos: [],
-          customers: [],           
+          customers: [],       
       }
 
   this.handleChange = this.handleChange.bind(this);
@@ -42,8 +42,9 @@ class SalesRecordForm extends React.Component {
         async handleSubmit(event) {
           event.preventDefault();
           const data = {...this.state};
-          data.sales_rep = data.salesReps;        
-          delete data.salesReps;
+          data.sales_rep = data.salesRep; 
+          delete data.salesReps     
+          delete data.salesRep;
           delete data.customers;               
           delete data.autos;               
           console.log(data)
@@ -89,6 +90,7 @@ class SalesRecordForm extends React.Component {
                         <select onChange={this.handleChange} value={this.state.automobile} required name="automobile" id="automobile" className="form-select">
                           <option value="">Choose an automobile</option>
                           {this.state.autos.map(auto => {
+                            console.log(this.state.autos)
                             return (
                               <option key={auto.href} value={auto.vin}>
                                   {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
@@ -110,7 +112,6 @@ class SalesRecordForm extends React.Component {
                 <div className="mb-3">
                         <select onChange={this.handleChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
                           <option value="">Choose a Customer</option>
-                          {console.log("test", this.state)}
                           {this.state.customers.map(customer => {
                             return (
                               <option key={customer.name} value={customer.name}>{customer.name}</option>

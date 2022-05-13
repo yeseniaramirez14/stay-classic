@@ -1,4 +1,6 @@
+from xmlrpc.client import Boolean
 from django.db import models
+from django.forms import BooleanField
 
 class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
@@ -42,6 +44,7 @@ class SalesRecord(models.Model):
         on_delete=models.PROTECT,
     )
     price = models.PositiveSmallIntegerField()
+    bought = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.sales_rep}"

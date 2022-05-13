@@ -18,12 +18,6 @@ class SalesRepForm extends React.Component {
         this.setState(newState)
     }
 
-    // As an example to reference
-    // handleemployeeNumberChange(event) {
-    //     const value = event.target.value;
-    //     this.setState({manufactuer: value})
-    // }
-
     async componentDidMount() {
         const url = "http://localhost:8090/api/salesreps/";
     
