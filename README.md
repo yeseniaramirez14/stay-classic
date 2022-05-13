@@ -70,6 +70,9 @@ The service microservice will have 3 models: Technician, Service and AutomobileV
             - is_vip is how I am able to track if an automobile was in our inventory. When the service form is submitted, if the VIN entered matches a VIN that was in our inventory, then that customer will receive VIP treatment since they bought their automobile from our dealership. 
             - is_finished is how the completion of service is tracked. In the list of services, once you click on the "Finished" button, then it will update is_finished to be true. The service appointment will then show up on the Service History page. 
 
+        - Service history 
+            - The service history page is where all the completed services are listed. They are filtered by VINs. Once you type a VIN in the search bar, it will update the list to show which services have been completed for that automobile. If the service has not been completed yet, then it will not show up on the Service History page. 
+
 My thought process starting the project: 
 I will install the service app into the inventory microservice and make my models and views to show the list of my model. I will write the paths to my views and check my work on Insomnia. I will add to my view function to handle POST requests. That will complete my back end. Then I will begin on the front-end by polling for the automobiles for the vin. Then I will begin creating my React files and building my React components to fetch and show the lists and complete the forms. I will implement the delete request for the cancel button and d-none for my finished projects. Then I will work on the search bar for the service history. 
 
