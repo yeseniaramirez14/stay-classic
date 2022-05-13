@@ -44,7 +44,6 @@ class SalesRecord(models.Model):
         on_delete=models.PROTECT,
     )
     price = models.PositiveSmallIntegerField()
-    bought = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.sales_rep}"
