@@ -6,6 +6,52 @@ Team:
 * Corey Edwards - Sales Microservice
 
 ## Design
+In our design there are three bounded contexts: Inventory, Service and Sales.
+    1. Inventory
+        - Manufacturer
+            -Name 
+        - Vehicle Model
+            -Name
+            -Photo
+            -Manufacturer 
+        - Automobile 
+            -Color
+            -Year
+            -VIN
+            -Model
+    2. Sales
+        - Sales Rep
+            -Name
+            -Employee number
+        - Customer 
+            -Name
+            -Address
+            -Phone number
+        - AutomobileVO
+            -VIN
+            -Import href
+        - Sales Record
+            -Automobile
+            -Sales Rep
+            -Customer
+            -Price
+    3. Service
+        - Technician
+            -Name
+            -Employee number
+        - AutomobileVO
+            -VIN
+        - Service
+            -VIN
+            -Customer
+            -Date and time
+            -Technician
+            -Reason
+            -VIP status
+            -Completion status
+
+These three bounded contexts are connected with the Automobile model in the Inventory microservice. Both sales and service needed to poll data from Automobile to use in their own microservice. 
+
 
 ## Service microservice
 
