@@ -21,6 +21,17 @@ class TechniciansList extends React.Component {
         }
     }
 
+    async deleteService(technician_id){
+        const deleteUrl = `http://localhost:8080/api/technicians/${technician_id}/`;
+        const fetchConfig = {method: "delete"}        
+
+        const response = await fetch(deleteUrl, fetchConfig);
+        if (response.ok) {
+            console.log(response)
+            window.location.reload();
+        }
+    };
+
     render() {
         return (
             <div>
@@ -30,6 +41,7 @@ class TechniciansList extends React.Component {
                         <tr>
                             <th>Name</th>
                             <th>Employee number</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +50,9 @@ class TechniciansList extends React.Component {
                                 <tr key={technician.employee_number}>
                                     <td>{technician.name}</td>
                                     <td>{technician.employee_number}</td>
+                                    <td> 
+                                        <button onClick={() => this.deleteService(technician.id)} type="button" className='btn btn-danger'>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}
