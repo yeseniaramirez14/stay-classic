@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 class TechniciansServicesList extends React.Component {
@@ -45,12 +46,40 @@ class TechniciansServicesList extends React.Component {
         }
     }
 
+
+    async deleteService(service_id){
+        const deleteUrl = `http://localhost:8080/api/services/${service_id}/`;
+        const fetchConfig = {method: "delete"}        
+
+        const response = await fetch(deleteUrl, fetchConfig);
+        if (response.ok) {
+            console.log(response)
+            window.location.reload();
+        }
+    };
+
+
+    async serviceFinished(service_id){
+        const putURL = `http://localhost:8080/api/services/${service_id}/`;
+        const fetchConfig = {
+            method: "put", 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({is_finished: true})
+        }; 
+
+        const response = await fetch(putURL, fetchConfig);
+        if (response.ok) {
+            console.log(response)
+            window.location.reload();
+        }
+    };
+
     render() {
         return (
             <div>
                 <h1>A list of technician's unfinished appointments</h1>
                 <div className="mb-3">
-                    <select onChange={this.handleChange} value={this.state.technician.id} required name="technician" id="technician" className="form-select">
+                    <select onChange={this.handleChange} value={this.state.technician} required name="technician" id="technician" className="form-select">
                         <option value="">Choose a technician</option>
                         {this.state.technicians.map(technician => {
                         return (
@@ -87,7 +116,7 @@ class TechniciansServicesList extends React.Component {
                                 finishedStatus = 'd-none'
                             }
 
-                            if (this.state.technician.id === service.technician.id) {
+                            if (this.state.technician === service.technician.name) {
                                 return (
                                     <tr key={service.id}>
                                         <td className={finishedStatus}>{service.vin}</td>
@@ -97,13 +126,13 @@ class TechniciansServicesList extends React.Component {
                                         <td className={finishedStatus}>{service.reason}</td>
                                         <td className={finishedStatus}>{vipStatus}</td>
                                         <td className={finishedStatus}> 
+                                            <Link to="/editservice" className="btn btn-warning">Edit</Link>
                                             <button onClick={() => this.deleteService(service.id)} type="button" className='btn btn-danger'>Cancel</button>
                                             <button onClick={() => this.serviceFinished(service.id)} type="button" className='btn btn-success'>Finished</button>
                                         </td>
                                     </tr>
                                 )
                             }
-
                         })}
                     </tbody>
                 </table>

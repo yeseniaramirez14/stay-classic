@@ -38,6 +38,38 @@ class TechniciansList extends React.Component {
     }
 
 
+    async inactiveTechnician(technician_id){
+        const putURL = `http://localhost:8080/api/technicians/${technician_id}/`;
+        const fetchConfig = {
+            method: "put", 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({is_active: false})
+        }; 
+
+        const response = await fetch(putURL, fetchConfig);
+        if (response.ok) {
+            console.log(response)
+            window.location.reload();
+        }
+    };
+
+    async activeTechnician(technician_id){
+        const putURL = `http://localhost:8080/api/technicians/${technician_id}/`;
+        const fetchConfig = {
+            method: "put", 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({is_active: true})
+        }; 
+
+        const response = await fetch(putURL, fetchConfig);
+        if (response.ok) {
+            console.log(response)
+            window.location.reload();
+        }
+    };
+
+
+
     async deleteTechnician(technician_id){
         const deleteUrl = `http://localhost:8080/api/technicians/${technician_id}/`;
         const fetchConfig = {method: "delete"}        
@@ -113,11 +145,21 @@ class TechniciansList extends React.Component {
                             <th>Employee number</th>
                             <th># of Service Appointments</th>
                             <th>List of Service Appointments</th>
-                            <th>Delete</th>
+                            <th>Active?</th>
+                            <th>Activate/Deactivate</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.technicians.map(technician => {
+
+                            let deactivateStatusButtons = 'btn btn-danger';
+                            let activeStatusButtons = 'btn btn-danger d-none'
+
+                            if (technician.is_active === false) {
+                                deactivateStatusButtons = 'btn btn-danger d-none'
+                                activeStatusButtons = 'btn btn-success'
+                            }
+                            
                             return (
                                 <tr key={technician.employee_number}>
                                     <td>{technician.name}</td>
@@ -125,9 +167,11 @@ class TechniciansList extends React.Component {
                                     <td>{this.servicesPerTechnician(technician.id)}</td>
                                     <td>
                                         <Link to="/technicians_services_list" className="btn btn-warning">Go to list</Link>
-                                    </td>                                 
+                                    </td> 
+                                    <td>{technician.is_active ? "Yes" : "No" }</td>                               
                                     <td> 
-                                        <button onClick={() => this.deleteTechnician(technician.id)} type="button" className='btn btn-danger'>Delete</button>
+                                        <button onClick={() => this.inactiveTechnician(technician.id)} type="button" className={deactivateStatusButtons}>Deactivate</button>
+                                        <button onClick={() => this.activeTechnician(technician.id)} type="button" className={activeStatusButtons}>Activate</button>
                                     </td>
                                 </tr>
                             )

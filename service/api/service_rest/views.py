@@ -23,7 +23,8 @@ class TechnicianEncoder(ModelEncoder):
     properties = [
         "name",
         "employee_number",
-        "id"
+        "id",
+        "is_active"
     ]
 
 
@@ -37,7 +38,7 @@ class ServiceListEncoder(ModelEncoder):
         "technician",
         "reason",
         "is_vip",
-        "is_finished"
+        "is_finished",
     ]
     encoders = {
         "technician": TechnicianEncoder(),

@@ -20,6 +20,7 @@ import ManufacturerForm from './Inventory/ManufacturerForm';
 import VehicleModelForm from './Inventory/VehicleModelForm';
 import AutomobileForm from './Inventory/AutomobileForm';
 import TechniciansServicesList from './Services/TechniciansServicesList';
+import EditService from './Services/EditService';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path="new/" element={<AutomobileForm />} />
           </Route>
           <Route path="technicians_services_list" element={<TechniciansServicesList />} />
+          <Route path="editservice" element={<EditService />} />
         </Routes>
       </div>
     </BrowserRouter>
