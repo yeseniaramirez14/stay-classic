@@ -23,7 +23,8 @@ class TechnicianEncoder(ModelEncoder):
     properties = [
         "name",
         "employee_number",
-        "id"
+        "id",
+        "is_active"
     ]
 
 
@@ -37,7 +38,7 @@ class ServiceListEncoder(ModelEncoder):
         "technician",
         "reason",
         "is_vip",
-        "is_finished"
+        "is_finished",
     ]
     encoders = {
         "technician": TechnicianEncoder(),
@@ -80,6 +81,23 @@ def api_list_technicians(request):
             safe=False
         )
 
+
+@require_http_methods(["DELETE", "PUT"])
+def api_detail_technicians(request, pk):
+    if request.method == "DELETE":
+        count, _ = Technician.objects.filter(id=pk).delete()
+        return JsonResponse(
+            {"deleted": count > 0}
+        )
+    else:
+        content = json.loads(request.body)
+        Technician.objects.filter(id=pk).update(**content)
+        service = Technician.objects.get(id=pk)
+        return JsonResponse(
+            service,
+            encoder=TechnicianEncoder,
+            safe=False
+        )
 
 @require_http_methods(["GET", "POST"])
 def api_list_services(request):
