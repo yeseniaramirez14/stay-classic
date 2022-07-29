@@ -1,8 +1,8 @@
-# CarCar
+# Stay Classic
 
 Team:
 
-* Yesenia Ramirez - Service
+* Yesenia Ramirez - Service Microservice
 * Corey Edwards - Sales Microservice
 
 ## Design
