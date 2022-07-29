@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import './App.css';
 import ServicesList from './Services/ServicesList';
 import ServiceForm from './Services/ServiceForm';
 import TechniciansList from './Services/TechniciansList';
