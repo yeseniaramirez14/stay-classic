@@ -26,7 +26,7 @@ There are three bounded contexts: Inventory, Service and Sales.
 
 <br>
 <a name="team"></a>
-<h3><ins>Team Structure:</ins></h3> 
+<ins>Team Structure:</ins>
 
 - Yesenia: Services microservice
 - Corey: Sales microservice
@@ -34,7 +34,7 @@ There are three bounded contexts: Inventory, Service and Sales.
 <br>
 
 <a name="service"></a>
-<h3><ins>Service microservice</ins></h3>
+<ins>Service microservice</ins>
 
 The service microservice will have 3 models: AutomobileVO, Technician, Service. 
 
@@ -59,7 +59,7 @@ The service microservice will have 3 models: AutomobileVO, Technician, Service.
 
 <br>
 <a name="sale"></a>
-<h3><ins>Sales microservice</ins></h3>
+<ins>Sales microservice</ins>
 
 - Inside of the sales microservice, I have 4 models. My AutomobileVO model so I can poll for the car's VINs in my inventory. The SalesRep and Customer model are required before you can create a sales record. The Sales Record model is dependent on all three other models. 
 - A Targeted Sales Record list is available so the employee can check the sales records of a specific sales rep. 
