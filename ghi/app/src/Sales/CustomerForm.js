@@ -6,7 +6,8 @@ class CustomerForm extends React.Component {
         this.state = {
             name: '',
             address: '',
-            phoneNumber: ''
+            phoneNumber: '',
+            successfulSubmit: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,6 +42,7 @@ class CustomerForm extends React.Component {
         const data = {...this.state};
         data.phone_number = data.phoneNumber
         delete data.phoneNumber
+        delete data.successfulSubmit;
         console.log(data)
 
         const customersURL = "http://localhost:8090/api/customers/";
@@ -55,6 +57,7 @@ class CustomerForm extends React.Component {
         if (response.ok) {
             const newCustomer = await response.json();
             console.log(newCustomer)
+            this.state.successfulSubmit = true;
 
             const cleared = {
                 name: '',
@@ -66,12 +69,19 @@ class CustomerForm extends React.Component {
     }
 
     render() {
+      let formClasses = '';
+      let alertClasses = 'alert alert-success d-none mb-0'
+
+      if (this.state.successfulSubmit) {
+        formClasses='d-none';
+        alertClasses='alert alert-success mb-0'
+      }
         return (
             <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
                 <h1>Create a new Customer</h1>
-                <form onSubmit={this.handleSubmit} id="create-customer-form">
+                <form onSubmit={this.handleSubmit} id="create-customer-form" className={formClasses}>
                   <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
                     <label htmlFor="name">Name</label>
@@ -86,6 +96,9 @@ class CustomerForm extends React.Component {
                   </div>
                   <button className="btn btn-primary">Create</button>
                 </form>
+                <div className={alertClasses} id="success-message">
+                  You have created a new customer. 
+                </div>
               </div>
             </div>
           </div>

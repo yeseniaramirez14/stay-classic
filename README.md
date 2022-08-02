@@ -1,84 +1,151 @@
-# Stay Classic
+<h1 align="center">Welcome to Stay Classic Dealership 👋</h1>
 
-Team:
+<p align="center">Stay Classic Dealership is a web application that has all the needs to operate a car dealership, including inventory, sales and services. </p>
+<hr>
+<br>
 
-* Yesenia Ramirez - Service Microservice
-* Corey Edwards - Sales Microservice
+## Table of Contents 
+- [Technologies Used](#technologies-used)
+- [Design](#design)
+    - [Team Structure](#team)
+    - [Service Microservice](#service)
+    - [Sales Microservice](#sale)
+- [Installation/Setup](#installationsetup)
+- [Application Overview](#application-overview)
+- [Authors](#authors)
+
+<hr>
+<br>
+
+## Technologies Used 
+<img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/pypi-3775A9?style=for-the-badge&logo=pypi&logoColor=white"> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"> <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"> 
+<br>
+<br>
 
 ## Design
-In our design there are three bounded contexts: Inventory, Service and Sales.
-    1. Inventory
-        - Manufacturer
-            -Name 
-        - Vehicle Model
-            -Name
-            -Photo
-            -Manufacturer 
-        - Automobile 
-            -Color
-            -Year
-            -VIN
-            -Model
-    2. Sales
-        - Sales Rep
-            -Name
-            -Employee number
-        - Customer 
-            -Name
-            -Address
-            -Phone number
-        - AutomobileVO
-            -VIN
-            -Import href
-        - Sales Record
-            -Automobile
-            -Sales Rep
-            -Customer
-            -Price
-    3. Service
-        - Technician
-            -Name
-            -Employee number
-        - AutomobileVO
-            -VIN
-        - Service
-            -VIN
-            -Customer
-            -Date and time
-            -Technician
-            -Reason
-            -VIP status
-            -Completion status
+There are three bounded contexts: Inventory, Service and Sales.
+- These bounded contexts are connected through the Automobile model in the Inventory microservice. Both sales and services needed to poll data from Automobile to use in their own microservice. 
 
-These three bounded contexts are connected with the Automobile model in the Inventory microservice. Both sales and service needed to poll data from Automobile to use in their own microservice. 
+<br>
+<a name="team"></a>
+<h3><u>Team Structure:</u></h3> 
 
+- Yesenia: Services microservice
+- Corey: Sales microservice
 
-## Service microservice
+<br>
 
-The service microservice will have 3 models: Technician, Service and AutomobileVO. 
+<a name="service"></a>
+<h3><u>Service microservice</u></h3>
 
-    1. Technician
-        - The Technician model will allow an employee to create a technician with a name and employee number. The employee number has to be unique. 
+The service microservice will have 3 models: AutomobileVO, Technician, Service. 
 
-    2. AutomobileVO
-        - The AutomobileVO model will poll data from the Inventory microservice so the Service microservice has access to the automobile's VIN. 
+<b>AutomobileVO</b>
+- The AutomobileVO model will poll data from the Inventory microservice so the Service microservice has access to the automobile's VIN. 
 
-    3. Service
-        - The Service model will allow an employee to create a service appointment. To create a service appointment, you need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
+<b>Technician</b>
+- The Technician model will allow an employee to create a technician with a name and employee number. The employee number has to be unique. 
 
-        - The Service model also has two additional properties: is_vip and is_finished
-            - is_vip is how I am able to track if an automobile was in our inventory. When the service form is submitted, if the VIN entered matches a VIN that was in our inventory, then that customer will receive VIP treatment since they bought their automobile from our dealership. 
-            - is_finished is how the completion of service is tracked. In the list of services, once you click on the "Finished" button, then it will update is_finished to be true. The service appointment will then show up on the Service History page. 
+<b>Service</b>
+- The Service model will allow an employee to create a service appointment. The employee will need the car's VIN, customer name, date and time, technician completing the service, and the reason for the appointment. 
 
-        - Service history 
-            - The service history page is where all the completed services are listed. They are filtered by VINs. Once you type a VIN in the search bar, it will update the list to show which services have been completed for that automobile. If the service has not been completed yet, then it will not show up on the Service History page. 
+- The Service model also has two additional properties: is_vip and is_finished
+    - is_vip is how the employee is able to track if an automobile was in their inventory by the automobile's VIN. The customer will receive VIP treatment on their service appointment if they bought their automobile from Stay Classic Dealership.
+    - is_finished is how the completion of service is tracked. Once a service is completed then it will be shown on the Service History page.
 
-        - Cancel a service
-            - You can cancel a scheduled service by clicking the cancel button, which will delete the appointment from the database. 
+- Service history 
+    - The service history page is where all the completed services are listed. They are filtered by VINs. Once you type a VIN in the search bar, it will update the list to show which services have been completed for that automobile. If the service has not been completed yet, then it will not show up on the Service History page. 
 
-My thought process starting the project: 
-I will install the service app into the inventory microservice and make my models and views to show the list of my model. I will write the paths to my views and check my work on Insomnia. I will add to my view function to handle POST requests. That will complete my back end. Then I will begin on the front-end by polling for the automobiles for the vin. Then I will begin creating my React files and building my React components to fetch and show the lists and complete the forms. I will implement the delete request for the cancel button and d-none for my finished projects. Then I will work on the search bar for the service history. 
+- Cancel a service
+    - You can cancel a scheduled service by clicking the cancel button, which will delete the appointment from the database. 
 
-## Sales microservice
+<br>
+<a name="sale"></a>
+<h3><u>Sales microservice</u></h3>
 
-Inside of the sales microservice I have 4 models. My AutomobileVO so I can poll for the VIN numbers for the cars in my inventory and thus making this entire thing function. Creation of a customer and a sales rep is mandatory as well but are things that can stand alone so not much to worry about there. Now the sales records are where the fun begins. The sales records' only stand alone piece of information is the fact that you set the price. The rest of it is using data provided from the sales rep list, the customer list, and the Automobile VIN numbers we polled in the beginning. Then and only then can you create a proper sales record. We also included a targeted sales record list so that way you can check the sales records of specific employees without having to read every sales record. Creation posts our data we have ways to get it with the use of the lists and if you need to delete something we included our models in the admin section.
+- Inside of the sales microservice, I have 4 models. My AutomobileVO model so I can poll for the car's VINs in my inventory. The SalesRep and Customer model are required before you can create a sales record. The Sales Record model is dependent on all three other models. 
+- A Targeted Sales Record list is available so the employee can check the sales records of a specific sales rep. 
+
+<br>
+<hr>
+<br>
+
+## Installation/Setup
+1. Install [Docker](https://docs.docker.com/get-docker/)
+2. Git fork and clone this repo and navigate into the ```/stay-classic``` directory
+    ```sh
+    cd stay-classic
+    ```
+3. Create the docker volumes
+    ```sh
+    docker volume create beta-data
+    ```
+4. Docker compose build then up
+    ```sh
+    docker compose build 
+    docker compose up
+    ```
+
+5. Create superuser by connecting to the Docker container containing the microservice<br><i>You can use the container name or the first 4 numbers of the container ID.</i>
+    ```sh
+    docker exec -it <container name or ID> bash
+    python manage.py createsuperuser
+    ```
+<br>
+
+Access the application on [http://localhost:3000](http://localhost:3000) <br>
+Admin access on: <br>
+&emsp; Inventory: [http://localhost:8100/admin](http://localhost:8100/admin) <br>
+&emsp; Services: [http://localhost:8080/admin](http://localhost:8080/admin) <br>
+&emsp; Sales: [http://localhost:8090/admin](http://localhost:8090/admin)
+
+<br>
+<hr>
+<br>
+
+## Application Overview
+<div align="center">
+<h3><b>Home page</b></h3>
+Toggle nav bar with all the microservices separated<br>
+<img src="./README_imgs/homepage.gif" width="75%">
+
+<br>
+
+<h3><b>Inventory</b></h3>
+Manufacturer, model, and automobile create forms and list views.<br>
+<img src="./README_imgs/inventory.gif" width="75%">
+
+<br>
+
+<h3><b>Sales</b></h3>
+Sales rep, customer and sales record create forms and a list view of all the sales records sold by a specific sales rep. <br>
+<img src="./README_imgs/sales.gif" width="75%">
+
+<br>
+
+<h3><b>Technicians</b></h3>
+Technician create form and a list view with a deactivation feature when a technician is no longer working for the company. List of service appointments filtered by technician is available as well. <br>
+<img src="./README_imgs/technician.gif" width="75%">
+
+<br>
+
+<h3><b>Services</b></h3>
+Service appointment create form and a list view with a cancel and finished functionality. <br>
+Service history list that will show all the service appointments that have been completed. 
+<img src="./README_imgs/services.gif" width="75%">
+
+</div>
+
+<br>
+<hr>
+<br>
+
+## Authors
+
+👤 [**Yesenia**](https://www.yeseniar.dev): Services microservice
+
+* Portfolio Website: [yeseniar.dev](https://www.yeseniar.dev)
+* Github: [@yeseniaramirez14](https://github.com/yeseniaramirez14)
+* LinkedIn: [@yeseniaramirez14](https://linkedin.com/in/yeseniaramirez14)
+
+👤 [**Corey**](https://gitlab.com/corey.daniel.edwards): Sales microservice 

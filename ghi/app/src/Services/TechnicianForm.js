@@ -77,8 +77,8 @@ class TechnicianForm extends React.Component {
                     <button className="btn btn-primary">Create</button>
                   </form>
                   <div className={alertClasses} id="success-message">
-                  You have created a new technician. 
-                </div>
+                    You have created a new technician. 
+                  </div>
                 </div>
               </div>
             </div>

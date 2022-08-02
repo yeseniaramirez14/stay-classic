@@ -41,7 +41,7 @@ class VehicleModelsList extends React.Component {
                                 <tr key={model.id}>
                                     <td>{model.name}</td>
                                     <td>{model.manufacturer.name}</td>
-                                    <td><img src={ model.picture_url } alt="car" width="10%" height="10%" /></td>
+                                    <td><img src={ model.picture_url } alt="car" height="110" /></td>
                                 </tr>
                             )
                         })}

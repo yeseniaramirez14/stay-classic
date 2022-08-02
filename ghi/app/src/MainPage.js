@@ -9,7 +9,6 @@ function MainPage() {
           The premiere solution for automobile dealership
           management for <b>classic cars</b> including inventory, sales and services! 
         </p>
-        {content.map(createEntry)}
       </div>
       <div>
         <img className="mainPic" src={car} alt="Chevy Car" />

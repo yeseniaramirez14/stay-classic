@@ -24,18 +24,6 @@ function Nav() {
           </div>
           <div className="dropdown">
                 <a className="btn btn-danger btn-lg dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Services
-                </a>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <NavLink className="dropdown-item" to="technicians">List of Technicians</NavLink> 
-                  <NavLink className="dropdown-item" to="technicians/new">Create a Technician</NavLink> 
-                  <NavLink className="dropdown-item" to="services">List of Services</NavLink> 
-                  <NavLink className="dropdown-item" to="services/new">Create a New Service</NavLink> 
-                  <NavLink className="dropdown-item" to="servicehistory">Service History</NavLink> 
-                </div>
-          </div>
-          <div className="dropdown">
-                <a className="btn btn-danger btn-lg dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Sales
                 </a>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -44,6 +32,18 @@ function Nav() {
                   <NavLink className="dropdown-item" to="salesrecords/">List of Sales Records</NavLink> 
                   <NavLink className="dropdown-item" to="salesrecords/new">Create a Sales Record</NavLink> 
                   <NavLink className="dropdown-item" to="targetedrecords/">Targeted Sales Records</NavLink> 
+                </div>
+          </div>
+          <div className="dropdown">
+                <a className="btn btn-danger btn-lg dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Services
+                </a>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <NavLink className="dropdown-item" to="technicians">List of Technicians</NavLink> 
+                  <NavLink className="dropdown-item" to="technicians/new">Create a Technician</NavLink> 
+                  <NavLink className="dropdown-item" to="services">List of Services</NavLink> 
+                  <NavLink className="dropdown-item" to="services/new">Create a New Service</NavLink> 
+                  <NavLink className="dropdown-item" to="servicehistory">Service History</NavLink> 
                 </div>
           </div>
         </ul>

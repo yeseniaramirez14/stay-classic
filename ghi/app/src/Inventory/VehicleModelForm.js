@@ -8,6 +8,7 @@ class VehicleModelForm extends React.Component {
             manufacturers: [],
             manufacturer: '',
             photo: '',
+            successfulSubmit: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +41,7 @@ class VehicleModelForm extends React.Component {
         delete data.photo
         delete data.manufacturer
         delete data.manufacturers
+        delete data.successfulSubmit;
         console.log(data)
 
         const URL = "http://localhost:8100/api/models/";
@@ -55,6 +57,7 @@ class VehicleModelForm extends React.Component {
         if (response.ok) {
             const newModel = await response.json();
             console.log(newModel)
+            this.state.successfulSubmit = true;
 
             const cleared = {
                 name: '',
@@ -66,12 +69,19 @@ class VehicleModelForm extends React.Component {
     }
 
     render() {
+      let formClasses = '';
+      let alertClasses = 'alert alert-success d-none mb-0'
+
+      if (this.state.successfulSubmit) {
+        formClasses='d-none';
+        alertClasses='alert alert-success mb-0'
+      }
         return (
             <div className="row">
               <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                   <h1>Create a New Vehicle Model</h1>
-                  <form onSubmit={this.handleSubmit} id="create-model-form">
+                  <form onSubmit={this.handleSubmit} id="create-model-form" className={formClasses}>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" id="name" className="form-control" />
                       <label htmlFor="name">Name</label>
@@ -92,6 +102,9 @@ class VehicleModelForm extends React.Component {
                     </div>
                     <button className="btn btn-primary">Create</button>
                   </form>
+                  <div className={alertClasses} id="success-message">
+                    You have created a new model. 
+                  </div>
                 </div>
               </div>
             </div>

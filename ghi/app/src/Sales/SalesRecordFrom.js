@@ -7,7 +7,8 @@ class SalesRecordForm extends React.Component {
           price: '',
           salesReps: [],
           autos: [],
-          customers: [],       
+          customers: [],      
+          successfulSubmit: false, 
       }
 
   this.handleChange = this.handleChange.bind(this);
@@ -46,7 +47,8 @@ class SalesRecordForm extends React.Component {
           delete data.salesReps     
           delete data.salesRep;
           delete data.customers;               
-          delete data.autos;               
+          delete data.autos; 
+          delete data.successfulSubmit;              
           console.log(data)
       
           const salesRecordsUrl = 'http://localhost:8090/api/salesrecords/';
@@ -60,7 +62,9 @@ class SalesRecordForm extends React.Component {
           const response = await fetch(salesRecordsUrl, fetchConfig);
           if (response.ok) {
             const newName = await response.json();
-            console.log(newName)          
+            console.log(newName)
+            this.state.successfulSubmit = true;
+          
             const cleared = {
               salesRep: '',
               automobile: '',
@@ -80,12 +84,19 @@ class SalesRecordForm extends React.Component {
   
 
     render() {
+      let formClasses = '';
+      let alertClasses = 'alert alert-success d-none mb-0'
+
+      if (this.state.successfulSubmit) {
+        formClasses='d-none';
+        alertClasses='alert alert-success mb-0'
+      }
         return (
             <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
                 <h1>Create a new Sale Record</h1>
-                <form onSubmit={this.handleSubmit} id="create-salesrecord-form">
+                <form onSubmit={this.handleSubmit} id="create-salesrecord-form" className={formClasses}>
                 <div className="mb-3">
                         <select onChange={this.handleChange} value={this.state.automobile} required name="automobile" id="automobile" className="form-select">
                           <option value="">Choose an automobile</option>
@@ -125,6 +136,9 @@ class SalesRecordForm extends React.Component {
                   </div>
                   <button className="btn btn-primary">Create</button>
                 </form>
+                <div className={alertClasses} id="success-message">
+                  You have created a new sales record. 
+                </div>
               </div>
             </div>
           </div>

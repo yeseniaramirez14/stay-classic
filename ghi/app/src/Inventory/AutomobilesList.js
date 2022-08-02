@@ -47,7 +47,7 @@ class AutomobilesList extends React.Component {
                                     <td>{automobile.color}</td>
                                     <td>{automobile.year}</td>
                                     <td>{automobile.vin}</td>
-                                    <td><img src={ automobile.model.picture_url } alt="car" width="10%" height="10%" /></td>
+                                    <td><img className="carImg" src={ automobile.model.picture_url } alt="car" height="110"/></td>
                                 </tr>
                             )
                         })}
