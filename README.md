@@ -15,7 +15,6 @@
 - [Authors](#authors)
 
 <hr>
-<br>
 
 ## Technologies Used 
 <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/pypi-3775A9?style=for-the-badge&logo=pypi&logoColor=white"> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"> <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green"> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"> 
@@ -68,7 +67,6 @@ The service microservice will have 3 models: AutomobileVO, Technician, Service.
 
 <br>
 <hr>
-<br>
 
 ## Installation/Setup
 1. Install [Docker](https://docs.docker.com/get-docker/)
@@ -101,7 +99,6 @@ Admin access on: <br>
 
 <br>
 <hr>
-<br>
 
 ## Application Overview
 <div align="center">
@@ -125,7 +122,7 @@ Sales rep, customer and sales record create forms and a list view of all the sal
 
 <h3><b>Technicians</b></h3>
 Technician create form and a list view with a deactivation feature when a technician is no longer working for the company. List of service appointments filtered by technician is available as well. <br>
-<img src="./README_imgs/technician.gif" width="75%">
+<img src="./README_imgs/Technician.gif" width="75%">
 
 <br>
 
@@ -138,7 +135,6 @@ Service history list that will show all the service appointments that have been 
 
 <br>
 <hr>
-<br>
 
 ## Authors
 
